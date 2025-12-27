@@ -96,8 +96,6 @@ public final class OneWayWindowOverlay extends BlockInteractOverlay
         graphics.drawCenteredString(font, FACE_VALUE_ABBRS[face.ordinal()], x, y, -1/*0x555555*/);
     }
 
-
-
     private static List<Component> packLineList()
     {
         List<Component> lines = new ArrayList<>();

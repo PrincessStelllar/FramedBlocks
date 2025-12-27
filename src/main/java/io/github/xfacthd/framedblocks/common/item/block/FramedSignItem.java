@@ -20,7 +20,6 @@ public class FramedSignItem extends FramedStandingAndWallBlockItem
         this(FBContent.BLOCK_FRAMED_SIGN, FBContent.BLOCK_FRAMED_WALL_SIGN, Direction.DOWN, props);
     }
 
-    @SuppressWarnings("NullableProblems") // IDEA's nullability analysis is broken on generics
     protected FramedSignItem(Holder<Block> standing, Holder<Block> wall, Direction attachFace, Properties props)
     {
         super(standing.value(), wall.value(), attachFace, props);

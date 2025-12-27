@@ -17,7 +17,5 @@ public final class DynamicItemTintProviders
         ModLoader.postEvent(new RegisterItemTintProvidersEvent(TINT_PROVIDERS::put));
     }
 
-
-
     private DynamicItemTintProviders() { }
 }

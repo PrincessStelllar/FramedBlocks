@@ -90,8 +90,6 @@ public class FramedAdjustableDoublePanelBlock extends FramedAdjustableDoubleBloc
         return CamoGetter.NONE;
     }
 
-
-
     public static FramedAdjustableDoublePanelBlock standard(Properties props)
     {
         return new FramedAdjustableDoublePanelBlock(

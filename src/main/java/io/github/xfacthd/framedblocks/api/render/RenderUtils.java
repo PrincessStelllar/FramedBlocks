@@ -18,7 +18,6 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.RenderTypeHelper;
 
 import java.util.List;
 
@@ -26,13 +25,14 @@ public final class RenderUtils
 {
     private static final Direction[] DIRECTIONS = Direction.values();
 
-    public static RenderType getEntityRenderType(ChunkSectionLayer blockRenderType)
+    public static RenderType getEntityRenderType(ChunkSectionLayer chunkLayer)
     {
-        if (blockRenderType == ChunkSectionLayer.SOLID)
+        return switch (chunkLayer)
         {
-            return Sheets.solidBlockSheet();
-        }
-        return RenderTypeHelper.getEntityRenderType(blockRenderType);
+            case SOLID -> Sheets.solidBlockSheet();
+            case CUTOUT -> Sheets.cutoutBlockSheet();
+            case TRANSLUCENT -> Sheets.translucentBlockItemSheet();
+        };
     }
 
     public static void submitModel(
@@ -122,8 +122,6 @@ public final class RenderUtils
             consumer.putBulkData(pose, quad, redF, greenF, blueF, 1F, light, overlay);
         }
     }
-
-
 
     private RenderUtils() { }
 }

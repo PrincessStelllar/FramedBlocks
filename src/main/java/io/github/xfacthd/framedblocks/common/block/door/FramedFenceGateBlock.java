@@ -48,7 +48,7 @@ public class FramedFenceGateBlock extends FenceGateBlock implements IFramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        BlockUtils.addRequiredProperties(builder);
+        BlockUtils.addStandardProperties(this, builder);
     }
 
     @Override
@@ -127,8 +127,6 @@ public class FramedFenceGateBlock extends FenceGateBlock implements IFramedBlock
     {
         return defaultBlockState();
     }
-
-
 
     public static final class FenceGateStateMerger implements StateMerger
     {

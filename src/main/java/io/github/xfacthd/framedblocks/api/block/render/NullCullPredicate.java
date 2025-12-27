@@ -10,10 +10,10 @@ import java.util.function.Predicate;
  */
 public record NullCullPredicate(Predicate<BlockState> leftStateTest, Predicate<BlockState> rightStateTest)
 {
-    public static final NullCullPredicate NEVER = new NullCullPredicate(state -> false, state -> false);
-    public static final NullCullPredicate ALWAYS = new NullCullPredicate(state -> true, state -> true);
-    public static final NullCullPredicate ONLY_LEFT = new NullCullPredicate(state -> true, state -> false);
-    public static final NullCullPredicate ONLY_RIGHT = new NullCullPredicate(state -> false, state -> true);
+    public static final NullCullPredicate NEVER = new NullCullPredicate(_ -> false, _ -> false);
+    public static final NullCullPredicate ALWAYS = new NullCullPredicate(_ -> true, _ -> true);
+    public static final NullCullPredicate ONLY_LEFT = new NullCullPredicate(_ -> true, _ -> false);
+    public static final NullCullPredicate ONLY_RIGHT = new NullCullPredicate(_ -> false, _ -> true);
 
     public boolean testLeft(BlockState state)
     {

@@ -7,11 +7,11 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -84,11 +84,11 @@ public final class FluidSpriteParticle extends SingleQuadParticle
 
     @Override
     @SuppressWarnings("deprecation")
-    public int getLightColor(float partialTick)
+    protected int getLightCoords(float partialTick)
     {
-        int light = level.hasChunkAt(pos) ? LevelRenderer.getLightColor(level, pos) : 0;
-        int block = Math.max(brightness, LightTexture.block(light));
-        return LightTexture.pack(block, LightTexture.sky(light));
+        int light = level.hasChunkAt(pos) ? LevelRenderer.getLightCoords(level, pos) : 0;
+        int block = Math.max(brightness, LightCoordsUtil.block(light));
+        return LightCoordsUtil.pack(block, LightCoordsUtil.sky(light));
     }
 
     public static final class Provider implements ParticleProvider<FluidParticleOptions>

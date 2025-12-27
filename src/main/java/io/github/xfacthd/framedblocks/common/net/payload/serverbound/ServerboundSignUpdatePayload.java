@@ -36,6 +36,7 @@ public record ServerboundSignUpdatePayload(BlockPos pos, boolean front, String[]
         return TYPE;
     }
 
+    @SuppressWarnings("deprecation")
     public void handle(IPayloadContext ctx)
     {
         ServerPlayer player = (ServerPlayer) ctx.player();
@@ -45,7 +46,6 @@ public record ServerboundSignUpdatePayload(BlockPos pos, boolean front, String[]
         {
             Level level = player.level();
 
-            //noinspection deprecation
             if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof FramedSignBlockEntity sign)
             {
                 if (sign.isWaxed() || !player.getUUID().equals(sign.getEditingPlayer()))

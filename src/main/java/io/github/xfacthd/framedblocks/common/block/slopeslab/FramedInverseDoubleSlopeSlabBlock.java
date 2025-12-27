@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
 public class FramedInverseDoubleSlopeSlabBlock extends FramedDoubleBlock
@@ -37,7 +36,7 @@ public class FramedInverseDoubleSlopeSlabBlock extends FramedDoubleBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FramedProperties.FACING_HOR, BlockStateProperties.WATERLOGGED, FramedProperties.Y_SLOPE);
+        builder.add(FramedProperties.FACING_HOR, FramedProperties.Y_SLOPE);
     }
 
     @Override

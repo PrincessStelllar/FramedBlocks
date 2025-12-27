@@ -70,11 +70,11 @@ public class FramedFenceGateGeometry extends Geometry
             QuadModifier mod = QuadModifier.of(quad)
                     .apply(Modifiers.cutSide(7F/16F, 5F/16F - yOff, 9F/16F, 1F - yOff));
 
-            mod.export(quadMap.get(quadDir));
-
             mod.derive()
                     .apply(Modifiers.setPosition(2F/16F))
                     .export(quadMap.get(null));
+
+            mod.export(quadMap.get(quadDir));
         }
 
         if (open)
@@ -115,10 +115,7 @@ public class FramedFenceGateGeometry extends Geometry
                     .apply(Modifiers.cut(dir.getClockWise(), 14F/16F))
                     .apply(Modifiers.cut(dir.getCounterClockWise(), 14F/16F));
 
-            if (mod.hasFailed())
-            {
-                return;
-            }
+            if (mod.isFailed()) return;
 
             boolean up = quadDir == Direction.UP;
             float height = up ? 9F / 16F - yOff : 4F / 16F + yOff;

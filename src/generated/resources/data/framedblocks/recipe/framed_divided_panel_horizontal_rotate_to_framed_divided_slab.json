@@ -2,7 +2,6 @@
   "type": "framedblocks:rotate_shape",
   "block": "framedblocks:framed_divided_panel_horizontal",
   "result": {
-    "count": 1,
     "id": "framedblocks:framed_divided_slab"
   },
   "tool": "#c:tools/wrench"

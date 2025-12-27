@@ -4,7 +4,7 @@ import io.github.xfacthd.framedblocks.api.internal.InternalClientAPI;
 import io.github.xfacthd.framedblocks.api.model.ExtendedBlockModelPart;
 import io.github.xfacthd.framedblocks.api.model.data.QuadMap;
 import io.github.xfacthd.framedblocks.api.model.geometry.DefaultAO;
-import io.github.xfacthd.framedblocks.api.model.quad.QuadData;
+import io.github.xfacthd.framedblocks.api.model.quad.ExtMutableQuad;
 import io.github.xfacthd.framedblocks.api.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -48,7 +48,7 @@ public final class ModelUtils
      * onto the UV range they occupy as given by the values at 'uv1' and 'uv2' in the 'uv'
      * array, calculates the target UV coordinate corresponding to the value of 'coordTo'
      * and places it at 'uvTo' in the 'uv' array
-     * @param data The {@link QuadData} being operated on
+     * @param quad The {@link ExtMutableQuad} being operated on
      * @param coord1 The first coordinate
      * @param coord2 The second coordinate
      * @param coordTo The target coordinate, must lie between coord1 and coord2
@@ -56,51 +56,49 @@ public final class ModelUtils
      * @param uv2 The second UV texture coordinate
      * @param uvTo The target UV texture coordinate
      * @param vAxis Whether the modification should happen on the V axis or the U axis
-     * @param rotated Whether the UVs are rotated
      */
     public static void remapUV(
-            QuadData data,
+            ExtMutableQuad quad,
             float coord1,
             float coord2,
             float coordTo,
             int uv1,
             int uv2,
             int uvTo,
-            boolean vAxis,
-            boolean rotated
+            boolean vAxis
     )
     {
         float coordMin = Math.min(coord1, coord2);
         float coordMax = Math.max(coord1, coord2);
 
-        int uvIdx = rotated != vAxis ? 1 : 0;
+        int uvIdx = quad.uvRotated() != vAxis ? 1 : 0;
 
-        float uvAbs1 = data.uv(uv1, uvIdx);
-        float uvAbs2 = data.uv(uv2, uvIdx);
+        float uvAbs1 = quad.uvComponent(uv1, uvIdx);
+        float uvAbs2 = quad.uvComponent(uv2, uvIdx);
         float uvAbsMin = Math.min(uvAbs1, uvAbs2);
         float uvAbsMax = Math.max(uvAbs1, uvAbs2);
         boolean invert = ((coord2 > coord1) ^ (uvAbs2 > uvAbs1)) != vAxis;
 
         if (coordTo == coordMin)
         {
-            data.uv(uvTo, uvIdx, (invert) ? uvAbsMax : uvAbsMin);
+            quad.setUvComponent(uvTo, uvIdx, (invert) ? uvAbsMax : uvAbsMin);
         }
         else if (coordTo == coordMax)
         {
-            data.uv(uvTo, uvIdx, (invert) ? uvAbsMin : uvAbsMax);
+            quad.setUvComponent(uvTo, uvIdx, (invert) ? uvAbsMin : uvAbsMax);
         }
         else
         {
             float mult = (coordTo - coordMin) / (coordMax - coordMin);
             if (invert) mult = 1F - mult;
-            data.uv(uvTo, uvIdx, Mth.lerp(mult, uvAbsMin, uvAbsMax));
+            quad.setUvComponent(uvTo, uvIdx, Mth.lerp(mult, uvAbsMin, uvAbsMax));
         }
     }
 
-    public static boolean isQuadRotated(QuadData data)
+    public static boolean isQuadRotated(ExtMutableQuad data)
     {
-        return (Mth.equal(data.uv(0, 1), data.uv(1, 1)) || Mth.equal(data.uv(3, 1), data.uv(2, 1))) &&
-               (Mth.equal(data.uv(1, 0), data.uv(2, 0)) || Mth.equal(data.uv(0, 0), data.uv(3, 0)));
+        return (Mth.equal(data.uvComponent(0, 1), data.uvComponent(1, 1)) || Mth.equal(data.uvComponent(3, 1), data.uvComponent(2, 1))) &&
+               (Mth.equal(data.uvComponent(1, 0), data.uvComponent(2, 0)) || Mth.equal(data.uvComponent(0, 0), data.uvComponent(3, 0)));
     }
 
     public static int encodeSecondaryTintIndex(int tintIndex)

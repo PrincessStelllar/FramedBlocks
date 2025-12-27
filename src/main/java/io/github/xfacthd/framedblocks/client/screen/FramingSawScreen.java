@@ -106,12 +106,10 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
 
     protected FramingSawScreen(FramingSawMenu menu, Inventory inv, Component title)
     {
-        super(menu, inv, title);
+        super(menu, inv, title, IMAGE_WIDTH, IMAGE_HEIGHT);
         this.titleLabelY -= 1;
         this.inventoryLabelX = 47;
         this.inventoryLabelY = 139;
-        this.imageWidth = IMAGE_WIDTH;
-        this.imageHeight = IMAGE_HEIGHT;
         this.filteredRecipes.addAll(menu.getRecipes());
         Level level = Objects.requireNonNull(minecraft.level);
         this.additiveResolver = new CachingIngredientResolver.Multi(level, FramingSawRecipe.MAX_ADDITIVE_COUNT);
@@ -129,13 +127,6 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
                 font, searchX, searchY, SEARCH_WIDTH, SEARCH_HEIGHT, MSG_HINT_SEARCH, searchHandler, searchBox
         ));
         searchBox.setMaxLength(50);
-    }
-
-    @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick)
-    {
-        super.render(graphics, mouseX, mouseY, partialTick);
-        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
@@ -284,7 +275,7 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
             if (mouseX >= recX && mouseX < recX + RECIPE_WIDTH && mouseY >= recY && mouseY < recY + RECIPE_HEIGHT)
             {
                 FramingSawMenu.FramedRecipeHolder recipe = filteredRecipes.get(idx);
-                ItemStack result = recipe.getRecipe().getResult();
+                ItemStack result = recipe.getRecipe().getResultStack();
                 renderItemTooltip(graphics, mouseX, mouseY, result, recipe);
                 break;
             }
@@ -293,7 +284,6 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
 
     protected void renderItemTooltip(GuiGraphics graphics, int mouseX, int mouseY, ItemStack stack, FramingSawMenu.@Nullable FramedRecipeHolder recipeHolder)
     {
-        //noinspection ConstantConditions
         List<Component> components = new ArrayList<>(getTooltipFromItem(minecraft, stack));
         Optional<TooltipComponent> tooltip = stack.getTooltipImage();
 
@@ -531,7 +521,7 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
             int x = pLeft + relIdx % RECIPE_COLS * RECIPE_WIDTH + 1;
             int y = pTop + relIdx / RECIPE_COLS * RECIPE_HEIGHT + 1;
 
-            ItemStack stack = filteredRecipes.get(idx).getRecipe().getResult();
+            ItemStack stack = filteredRecipes.get(idx).getRecipe().getResultStack();
             graphics.renderItem(stack, x, y, x * y * imageWidth);
             graphics.renderItemDecorations(font, stack, x, y);
         }
@@ -677,7 +667,7 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
         query = query.toLowerCase(Locale.ROOT);
         for (FramingSawMenu.FramedRecipeHolder recipe : menu.getRecipes())
         {
-            Component name = recipe.getRecipe().getResult().getItemName();
+            Component name = recipe.getRecipe().getResultStack().getItemName();
             if (name.getString().toLowerCase(Locale.ROOT).contains(query))
             {
                 recipes.add(recipe);
@@ -713,8 +703,6 @@ public class FramingSawScreen extends AbstractContainerScreen<FramingSawMenu> im
         int idx = (int) ((double) (scrollOffset * (float) hiddenRows) + .5D) * RECIPE_COLS;
         return Mth.clamp(idx, 0, filteredRecipes.size() - 1);
     }
-
-
 
     public static FramingSawScreen create(FramingSawMenu menu, Inventory inv, Component title)
     {

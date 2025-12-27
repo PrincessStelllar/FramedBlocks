@@ -78,11 +78,9 @@ public class FramedBookshelfGeometry extends Geometry
         consumer.acceptAll(baseModel, level, pos, random, state, false, false, false, false, AUX_SHADER_STATE, null);
     }
 
-
-
     public static FramedBookshelfGeometry normal(GeometryFactory.Context ctx)
     {
-        return new FramedBookshelfGeometry(ctx, dir -> true);
+        return new FramedBookshelfGeometry(ctx, _ -> true);
     }
 
     public static FramedBookshelfGeometry chiseled(GeometryFactory.Context ctx)

@@ -10,7 +10,6 @@ import io.github.xfacthd.framedblocks.api.camo.CamoList;
 import io.github.xfacthd.framedblocks.api.camo.empty.EmptyCamoContainer;
 import io.github.xfacthd.framedblocks.api.util.ConfigView;
 import io.github.xfacthd.framedblocks.common.FBContent;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -91,7 +90,7 @@ public final class CamoApplicationRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries)
+    public ItemStack assemble(CraftingInput input)
     {
         if (input.width() != 2 || input.height() != 2 || !copyTool.test(input.getItem(1, 0))) return ItemStack.EMPTY;
 

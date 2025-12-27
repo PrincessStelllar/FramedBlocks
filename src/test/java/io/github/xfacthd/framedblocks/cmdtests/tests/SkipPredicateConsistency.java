@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.LongConsumer;
@@ -52,7 +53,7 @@ public final class SkipPredicateConsistency
         List<Inconsistency> inconsistencies = new ArrayList<>();
         AsyncTypeTest.Stats stats = AsyncTypeTest.execute(
                 SkipPredicateConsistency::testTypeAgainstAll,
-                (result, error) -> inconsistencies.addAll(result.inconsistencies),
+                (result, _) -> inconsistencies.addAll(result.inconsistencies),
                 PROGRESS_MSG,
                 msgQueueAppender
         );
@@ -153,8 +154,10 @@ public final class SkipPredicateConsistency
 
     private static boolean isOneWayCombination(BlockType type, BlockType adjType)
     {
-        return SkipPredicatePresenceConsistency.getTestOf(type).oneWayTargets().contains(adjType) ||
-               SkipPredicatePresenceConsistency.getTestOf(adjType).oneWayTargets().contains(type);
+        SkipPredicatePresenceConsistency.Test test = SkipPredicatePresenceConsistency.getTestOf(type);
+        SkipPredicatePresenceConsistency.Test adjTest = SkipPredicatePresenceConsistency.getTestOf(adjType);
+        return Objects.requireNonNull(test).oneWayTargets().contains(adjType) ||
+               Objects.requireNonNull(adjTest).oneWayTargets().contains(type);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -180,8 +183,6 @@ public final class SkipPredicateConsistency
     }
 
     private record Result(long combinations, List<Inconsistency> inconsistencies) { }
-
-
 
     private SkipPredicateConsistency() { }
 }

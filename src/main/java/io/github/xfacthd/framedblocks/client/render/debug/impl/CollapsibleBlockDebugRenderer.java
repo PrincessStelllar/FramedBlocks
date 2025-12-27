@@ -16,11 +16,11 @@ import io.github.xfacthd.framedblocks.common.data.collapsible.TargetCalculator;
 import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
@@ -123,7 +123,7 @@ public final class CollapsibleBlockDebugRenderer implements BlockDebugRenderer<F
                 buffer,
                 Font.DisplayMode.NORMAL,
                 0x00000000,
-                LightTexture.FULL_BRIGHT
+                LightCoordsUtil.FULL_BRIGHT
         );
 
         poseStack.popPose();

@@ -37,22 +37,14 @@ public final class BlockUtils
 
     /**
      * Adds the {@link Property}s which are required to be present on all blocks implementing {@link IFramedBlock}
-     * to the given {@link StateDefinition.Builder}
-     */
-    public static void addRequiredProperties(StateDefinition.Builder<Block, BlockState> builder)
-    {
-        REQUIRED_STATE_PROPERTIES.forEach(builder::add);
-    }
-
-    /**
-     * Adds the {@link Property}s which are required to be present on all blocks implementing {@link IFramedBlock}
      * and properties that depend on the {@link IBlockType}'s configuration to the given {@link StateDefinition.Builder}
      *
      * @apiNote This method must only be used by blocks which return a constant value from {@link IFramedBlock#getBlockType()}
+     *          or initialize the returned field before the super constructor.
      */
     public static <T extends Block & IFramedBlock> void addStandardProperties(T block, StateDefinition.Builder<Block, BlockState> builder)
     {
-        addRequiredProperties(builder);
+        REQUIRED_STATE_PROPERTIES.forEach(builder::add);
 
         if (block.getBlockType().canOccludeWithSolidCamo())
         {

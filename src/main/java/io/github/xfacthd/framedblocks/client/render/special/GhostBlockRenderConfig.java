@@ -30,7 +30,7 @@ abstract sealed class GhostBlockRenderConfig
         );
         renderPass.bindTexture(
                 "Sampler2",
-                Minecraft.getInstance().gameRenderer.lightTexture().getTextureView(),
+                Minecraft.getInstance().gameRenderer.lightmap(),
                 RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR)
         );
     }

@@ -36,10 +36,7 @@ public class FramedPyramidBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(
-                BlockStateProperties.FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED,
-                FramedProperties.Y_SLOPE
-        );
+        builder.add(BlockStateProperties.FACING, FramedProperties.Y_SLOPE);
     }
 
     @Override

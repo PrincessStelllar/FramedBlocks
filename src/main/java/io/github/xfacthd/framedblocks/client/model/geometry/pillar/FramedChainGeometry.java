@@ -46,12 +46,12 @@ public class FramedChainGeometry extends Geometry
             {
                 Direction.Axis perpAxis = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
 
-                createChainEdgeParts(quadMap, quad, quadDir, quadPerpAxis, dir -> axis == Direction.Axis.Z, Modifiers::cut, Modifiers::cut);
+                createChainEdgeParts(quadMap, quad, quadDir, quadPerpAxis, _ -> axis == Direction.Axis.Z, Modifiers::cut, Modifiers::cut);
                 createChainCenterParts(quadMap, quad, Modifiers::cut, len -> Modifiers.cut(perpAxis, len));
             }
             else
             {
-                createChainEdgeParts(quadMap, quad, quadDir, quadPerpAxis, dir -> axis == Direction.Axis.X, Modifiers::cut, Modifiers::cut);
+                createChainEdgeParts(quadMap, quad, quadDir, quadPerpAxis, _ -> axis == Direction.Axis.X, Modifiers::cut, Modifiers::cut);
                 createChainCenterParts(quadMap, quad, Modifiers::cut, length -> Modifiers.cut(Direction.Axis.Y, length));
             }
         }
@@ -124,6 +124,8 @@ public class FramedChainGeometry extends Geometry
                     .apply(Modifiers.rotate(axis, ROT_ORIGIN, 45, false))
                     .export(quadMap.get(null));
         }
+
+        baseMod.discard();
     }
 
     private void createChainCenterParts(
@@ -159,8 +161,6 @@ public class FramedChainGeometry extends Geometry
     {
         return true;
     }
-
-
 
     @FunctionalInterface
     private interface CutterFactory

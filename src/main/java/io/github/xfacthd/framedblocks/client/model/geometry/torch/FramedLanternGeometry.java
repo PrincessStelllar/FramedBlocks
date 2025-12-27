@@ -162,6 +162,8 @@ public class FramedLanternGeometry extends Geometry
                     .apply(Modifiers.rotate(Direction.Axis.Y, ROT_ORIGIN, 45, false))
                     .export(quadMap.get(null));
         }
+
+        baseEdgeMod.discard();
     }
 
     @Override

@@ -69,7 +69,5 @@ public final class ClientUtils
         return Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS).getSprite(id);
     }
 
-
-
     private ClientUtils() { }
 }

@@ -163,8 +163,6 @@ public class FramedWallHangingSignBlock extends AbstractFramedHangingSignBlock
         return state;
     }
 
-
-
     public static boolean canPlace(BlockState state, LevelReader level, BlockPos pos)
     {
         Direction dir = state.getValue(FramedProperties.FACING_HOR);

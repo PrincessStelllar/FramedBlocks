@@ -15,7 +15,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.model.data.ModelData;
 import org.jspecify.annotations.Nullable;
 
-@SuppressWarnings("ConstantConditions")
 public record SingleBlockFakeLevel(Level realLevel, BlockPos realPos, BlockPos fakePos, BlockState state, @Nullable BlockEntity blockEntity, ModelData modelData) implements BlockAndTintGetter
 {
     public SingleBlockFakeLevel(Level realLevel, BlockPos realPos, BlockState state, @Nullable BlockEntity blockEntity, ModelData modelData)

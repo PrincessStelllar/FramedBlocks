@@ -26,7 +26,7 @@ import java.util.Objects;
 public class FramedItemFrameGeometry extends Geometry
 {
     private static final int GLOWING_BRIGHTNESS = 5;
-    private static final QuadListModifier GLOWING_LEATHER_MODIFIER = (quadMap, quads, side) ->
+    private static final QuadListModifier GLOWING_LEATHER_MODIFIER = (_, quads, _) ->
             quads.replaceAll(quad -> Objects.requireNonNull(QuadModifier.of(quad).apply(Modifiers.setLightEmission(GLOWING_BRIGHTNESS, false)).exportDirect()));
 
     private final BlockState state;

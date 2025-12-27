@@ -44,7 +44,7 @@ public class FramedStackedInnerCornerSlopeEdgeBlock extends FramedDoubleBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FramedProperties.FACING_HOR, PropertyHolder.CORNER_TYPE, FramedProperties.Y_SLOPE, BlockStateProperties.WATERLOGGED);
+        builder.add(FramedProperties.FACING_HOR, PropertyHolder.CORNER_TYPE, FramedProperties.Y_SLOPE);
     }
 
     @Override
@@ -53,6 +53,7 @@ public class FramedStackedInnerCornerSlopeEdgeBlock extends FramedDoubleBlock
     {
         return ExtPlacementStateBuilder.of(this, ctx)
                 .withHorizontalFacingAndCornerType()
+                .withWater()
                 .build();
     }
 

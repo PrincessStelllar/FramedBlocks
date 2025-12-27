@@ -67,7 +67,6 @@ public class FramedItemFrameRenderer implements BlockEntityRenderer<FramedItemFr
         }
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yRot));
 
-        //noinspection ConstantConditions
         poseStack.translate(0.0D, 0.0D, ITEM_Z_OFF);
         float itemRotation = renderState.mapId != null ? (renderState.rotation % 4 * 2) : renderState.rotation;
         poseStack.mulPose(Axis.ZP.rotationDegrees(itemRotation * 360.0F / 8.0F));

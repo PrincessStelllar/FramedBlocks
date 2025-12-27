@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public interface BlockItemModelProvider
 {
-    BlockItemModelProvider DEFAULT = (state, baker) -> () -> Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
+    BlockItemModelProvider DEFAULT = (state, _) -> () -> Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
 
     Supplier<BlockStateModel> create(BlockState state, ModelBaker baker);
 

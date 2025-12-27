@@ -9,11 +9,11 @@ import io.github.xfacthd.framedblocks.api.util.Utils;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -65,7 +65,6 @@ public final class FramedBlockDebugRenderer
         float partialTick = event.getDeltaTracker().getGameTimeDeltaPartialTick(false);
         for (BlockDebugRenderer<? extends FramedBlockEntity> renderer : renderers)
         {
-            //noinspection NullableProblems - IDEA's nullability checks are broken
             ((BlockDebugRenderer<FramedBlockEntity>) renderer).extract(be, blockHit, partialTick, renderState);
         }
         renderState.setRenderData(DATA_KEY, new DebugRenderState(pos, renderers));
@@ -87,7 +86,7 @@ public final class FramedBlockDebugRenderer
         for (BlockDebugRenderer<? extends FramedBlockEntity> renderer : renderState.renderers)
         {
             poseStack.pushPose();
-            renderer.render(levelRenderState, poseStack, buffer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+            renderer.render(levelRenderState, poseStack, buffer, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
         }
         poseStack.popPose();
@@ -100,7 +99,7 @@ public final class FramedBlockDebugRenderer
 
         ModLoader.postEvent(new AttachDebugRenderersEvent((type, renderer) ->
         {
-            RENDERERS_BY_TYPE.computeIfAbsent(type, $ -> new ReferenceOpenHashSet<>()).add(renderer);
+            RENDERERS_BY_TYPE.computeIfAbsent(type, _ -> new ReferenceOpenHashSet<>()).add(renderer);
             RENDERERS.add(renderer);
         }));
 

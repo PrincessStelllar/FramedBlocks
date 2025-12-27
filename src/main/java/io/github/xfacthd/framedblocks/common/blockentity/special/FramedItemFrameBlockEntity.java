@@ -196,7 +196,7 @@ public class FramedItemFrameBlockEntity extends FramedBlockEntity implements Ite
         if (mapItem != mapState)
         {
             level().setBlockAndUpdate(worldPosition, getBlockState().setValue(PropertyHolder.MAP_FRAME, mapItem));
-            mapTickCount = mapTickOffset = mapItem ? level().random.nextInt(MAP_UPDATE_INTERVAL) : 0;
+            mapTickCount = mapTickOffset = mapItem ? level().getRandom().nextInt(MAP_UPDATE_INTERVAL) : 0;
             return true;
         }
         return false;

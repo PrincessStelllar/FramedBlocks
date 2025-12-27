@@ -42,10 +42,7 @@ public class FramedStackedSlopeEdgeBlock extends FramedDoubleBlock implements IC
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(
-                FramedProperties.FACING_HOR, PropertyHolder.SLOPE_TYPE,
-                FramedProperties.Y_SLOPE, BlockStateProperties.WATERLOGGED
-        );
+        builder.add(FramedProperties.FACING_HOR, PropertyHolder.SLOPE_TYPE, FramedProperties.Y_SLOPE);
     }
 
     @Override

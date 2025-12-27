@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import io.github.xfacthd.framedblocks.api.block.blockentity.FramedBlockEntity;
 import io.github.xfacthd.framedblocks.api.model.ModelPartCollectionFakeLevel;
-import io.github.xfacthd.framedblocks.api.model.quad.QuadData;
 import io.github.xfacthd.framedblocks.api.render.debug.BlockDebugRenderer;
 import io.github.xfacthd.framedblocks.api.util.Triangle;
 import io.github.xfacthd.framedblocks.api.util.Utils;
@@ -12,7 +11,6 @@ import io.github.xfacthd.framedblocks.common.config.DevToolsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
@@ -20,14 +18,17 @@ import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.model.quad.BakedNormals;
 import net.neoforged.neoforge.model.data.ModelData;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -67,7 +68,6 @@ public class QuadWindingDebugRenderer implements BlockDebugRenderer<FramedBlockE
         Vec3 eyePos = renderData.eyePos;
         Vec3 viewVector = renderData.viewVector;
         boolean sneak = renderData.sneak;
-        Vector3f vertPos = new Vector3f();
         Vector3f vertNorm = new Vector3f();
         for (BlockModelPart part : renderData.model.collectParts(renderData.level, renderData.pos, renderData.state, RANDOM))
         {
@@ -75,20 +75,18 @@ public class QuadWindingDebugRenderer implements BlockDebugRenderer<FramedBlockE
             {
                 for (BakedQuad quad : part.getQuads(side))
                 {
-                    QuadData data = new QuadData(quad);
-
-                    vertNorm.set(data.normal(0, 0), data.normal(0, 1), data.normal(0, 2)).normalize();
+                    BakedNormals.unpack(quad.bakedNormals().normal(0), vertNorm);
                     float dot = vertNorm.dot((float) viewVector.x, (float) viewVector.y, (float) viewVector.z);
                     if (dot > -.75F) continue;
 
-                    if (!sneak && !checkViewIntersectsQuad(data, eyePos, viewVector)) continue;
+                    if (!sneak && !checkViewIntersectsQuad(quad, eyePos, viewVector)) continue;
 
                     for (int i = 0; i < 4; i++)
                     {
-                        data.pos(i, vertPos);
+                        Vector3fc vertPos = quad.position(i);
 
                         poseStack.pushPose();
-                        poseStack.translate(vertPos.x, vertPos.y, vertPos.z);
+                        poseStack.translate(vertPos.x(), vertPos.y(), vertPos.z());
                         poseStack.mulPose(Minecraft.getInstance().gameRenderer.getMainCamera().rotation());
                         poseStack.mulPose(Axis.YP.rotationDegrees(180));
                         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
@@ -104,7 +102,7 @@ public class QuadWindingDebugRenderer implements BlockDebugRenderer<FramedBlockE
                                 Minecraft.getInstance().renderBuffers().bufferSource(),
                                 Font.DisplayMode.SEE_THROUGH,
                                 0x00000000,
-                                LightTexture.FULL_BRIGHT
+                                LightCoordsUtil.FULL_BRIGHT
                         );
 
                         poseStack.popPose();
@@ -114,21 +112,19 @@ public class QuadWindingDebugRenderer implements BlockDebugRenderer<FramedBlockE
         }
     }
 
-    private static boolean checkViewIntersectsQuad(QuadData quadData, Vec3 eyePos, Vec3 viewVector)
+    private static boolean checkViewIntersectsQuad(BakedQuad quad, Vec3 eyePos, Vec3 viewVector)
     {
-        Vector3f posVec = new Vector3f();
-
         Triangle triOne = new Triangle(
-                new Vec3(quadData.pos(0, posVec)),
-                new Vec3(quadData.pos(1, posVec)),
-                new Vec3(quadData.pos(2, posVec))
+                new Vec3(quad.position(0)),
+                new Vec3(quad.position(1)),
+                new Vec3(quad.position(2))
         );
         if (triOne.intersects(eyePos, viewVector)) return true;
 
         Triangle triTwo = new Triangle(
-                new Vec3(quadData.pos(2, posVec)),
-                new Vec3(quadData.pos(3, posVec)),
-                new Vec3(quadData.pos(0, posVec))
+                new Vec3(quad.position(2)),
+                new Vec3(quad.position(3)),
+                new Vec3(quad.position(0))
         );
         return triTwo.intersects(eyePos, viewVector);
     }

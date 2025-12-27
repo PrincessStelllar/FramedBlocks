@@ -39,7 +39,6 @@ public class FramedCornerSlopeGeometry extends Geometry
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void createHorizontalCornerSlope(QuadMap quadMap, BakedQuad quad)
     {
         Direction quadDir = quad.direction();

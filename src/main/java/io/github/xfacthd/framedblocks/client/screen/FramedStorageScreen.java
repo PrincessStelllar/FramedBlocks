@@ -17,19 +17,10 @@ public class FramedStorageScreen extends AbstractContainerScreen<FramedStorageMe
 
     public FramedStorageScreen(FramedStorageMenu menu, Inventory inv, Component title)
     {
-        super(menu, inv, title);
-
         int rows = menu.getRowCount();
-        this.imageHeight = 114 + rows * 18;
+        super(menu, inv, title, DEFAULT_IMAGE_WIDTH, 114 + rows * 18);
         this.inventoryLabelY = imageHeight - 94;
         this.invHeight = rows * 18 + 17;
-    }
-
-    @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
-    {
-        super.render(graphics, mouseX, mouseY, partialTicks);
-        this.renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override

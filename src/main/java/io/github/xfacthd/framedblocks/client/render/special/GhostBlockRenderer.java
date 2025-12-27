@@ -271,7 +271,7 @@ public final class GhostBlockRenderer
         poseStack.scale(SCALE, SCALE, SCALE); // Scale up very slightly to avoid z-fighting with replaceable blocks like snow layers
         poseStack.translate(-.5F, -.5F, -.5F);
         model.collectParts(level, pos, state, RANDOM, PART_SCRATCH_LIST);
-        mc().getBlockRenderer().renderBatched(state, pos, level, poseStack, type -> builder, false, PART_SCRATCH_LIST);
+        mc().getBlockRenderer().renderBatched(state, pos, level, poseStack, _ -> builder, false, PART_SCRATCH_LIST);
         PART_SCRATCH_LIST.clear();
         poseStack.popPose();
         profiler.pop(); //render

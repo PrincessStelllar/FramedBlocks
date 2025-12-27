@@ -342,8 +342,6 @@ public final class ClientConfig
 
     private ClientConfig() { }
 
-
-
     public static final class ViewImpl implements ExtConfigView.Client
     {
         @Override

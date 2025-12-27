@@ -24,10 +24,7 @@ public class FramedHalfPillarGeometry extends Geometry
     public void transformQuad(QuadMap quadMap, BakedQuad quad, ModelData modelData)
     {
         QuadModifier mod = FramedPillarGeometry.createPillarQuad(quad, face.getAxis(), 4F / 16F, 12F / 16F, 12F / 16F);
-        if (mod.hasFailed())
-        {
-            return;
-        }
+        if (mod.isFailed()) return;
 
         Direction quadDir = quad.direction();
         if (quadDir == face)

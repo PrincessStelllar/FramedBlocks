@@ -50,8 +50,8 @@ public class FramedDoorBlock extends DoorBlock implements IFramedBlockInternal
 
     private FramedDoorBlock(BlockType type, BlockSetType blockSet, Properties props)
     {
-        super(blockSet, props);
         this.type = type;
+        super(blockSet, props);
         BlockUtils.configureStandardProperties(this);
     }
 
@@ -59,8 +59,7 @@ public class FramedDoorBlock extends DoorBlock implements IFramedBlockInternal
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        BlockUtils.addRequiredProperties(builder);
-        builder.add(FramedProperties.SOLID);
+        BlockUtils.addStandardProperties(this, builder);
     }
 
     @Override
@@ -74,7 +73,6 @@ public class FramedDoorBlock extends DoorBlock implements IFramedBlockInternal
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack)
     {
-        //noinspection ConstantConditions
         super.setPlacedBy(level, pos, state, placer, stack);
         if (level.getBlockEntity(pos.above()) instanceof FramedDoorBlockEntity be)
         {
@@ -190,8 +188,6 @@ public class FramedDoorBlock extends DoorBlock implements IFramedBlockInternal
         return state;
     }
 
-
-
     public static FramedDoorBlock wood(Properties props)
     {
         return new FramedDoorBlock(
@@ -210,8 +206,6 @@ public class FramedDoorBlock extends DoorBlock implements IFramedBlockInternal
                         .requiresCorrectToolForDrops()
         );
     }
-
-
 
     public static final class DoorStateMerger implements StateMerger
     {

@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -37,10 +36,7 @@ public class FramedSlopedPrismBlock extends FramedBlock implements IFramedPrismB
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(
-                PropertyHolder.FACING_DIR, BlockStateProperties.WATERLOGGED,
-                FramedProperties.SOLID, FramedProperties.Y_SLOPE
-        );
+        builder.add(PropertyHolder.FACING_DIR, FramedProperties.Y_SLOPE);
     }
 
     @Override

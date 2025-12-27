@@ -75,11 +75,11 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels)
     {
         Identifier cube = TEMPLATE_CUTOUT_CUBE.create(FBContent.BLOCK_FRAMED_CUBE.value(), TextureMapping.cube(TEXTURE), blockModels.modelOutput);
-        Identifier stoneCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_stone_cube"), TEXTURE, mcLocation("block/stone"), $ -> {});
-        Identifier obsidianCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_obsidian_cube"), TEXTURE, mcLocation("block/obsidian"), $ -> {});
-        Identifier ironCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_iron_cube"), TEXTURE, mcLocation("block/iron_block"), $ -> {});
-        Identifier goldCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_gold_cube"), TEXTURE, mcLocation("block/gold_block"), $ -> {});
-        Identifier snowCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_snow_cube"), TEXTURE, mcLocation("block/snow"), $ -> {});
+        Identifier stoneCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_stone_cube"), TEXTURE, mcLocation("block/stone"), _ -> {});
+        Identifier obsidianCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_obsidian_cube"), TEXTURE, mcLocation("block/obsidian"), _ -> {});
+        Identifier ironCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_iron_cube"), TEXTURE, mcLocation("block/iron_block"), _ -> {});
+        Identifier goldCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_gold_cube"), TEXTURE, mcLocation("block/gold_block"), _ -> {});
+        Identifier snowCube = makeUnderlayedCube(blockModels, Utils.id("block/framed_snow_cube"), TEXTURE, mcLocation("block/snow"), _ -> {});
 
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_SLOPE, cube);
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_DOUBLE_SLOPE, cube);
@@ -770,7 +770,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
     private void registerFramedCollapsibleBlock(BlockModelGenerators blockModels)
     {
-        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_BLOCK, TEXTURE, mcLocation("block/oak_planks"), $ -> {});
+        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_BLOCK, TEXTURE, mcLocation("block/oak_planks"), _ -> {});
         Identifier altCube = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_BLOCK, TEXTURE_ALT, mcLocation("block/spruce_planks"), builder -> builder.suffix("_alt"));
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_BLOCK, block)
                 .addAuxModel(FramedCollapsibleBlockGeometry.ALT_BASE_MODEL_KEY, singleVariant(altCube));
@@ -778,7 +778,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
     private void registerFramedCollapsibleCopycatBlock(BlockModelGenerators blockModels)
     {
-        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_COPYCAT_BLOCK, TEXTURE, mcLocation("block/copper_block"), $ -> {});
+        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_COPYCAT_BLOCK, TEXTURE, mcLocation("block/copper_block"), _ -> {});
         Identifier altCube = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_COPYCAT_BLOCK, TEXTURE_ALT, mcLocation("block/copper_block"), builder -> builder.suffix("_alt"));
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_COLLAPSIBLE_COPYCAT_BLOCK, block)
                 .addAuxModel(FramedCollapsibleCopycatBlockGeometry.ALT_BASE_MODEL_KEY, singleVariant(altCube));
@@ -786,7 +786,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
     private void registerFramedBouncyBlock(BlockModelGenerators blockModels)
     {
-        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_BOUNCY_CUBE, TEXTURE, mcLocation("block/slime_block"), $ -> {});
+        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_BOUNCY_CUBE, TEXTURE, mcLocation("block/slime_block"), _ -> {});
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_BOUNCY_CUBE, block)
                 .addAuxModel(FramedMarkedCubeGeometry.FRAME_KEY, singleVariant(FramedMarkedCubeGeometry.SLIME_FRAME_LOCATION));
 
@@ -795,7 +795,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
     private void registerFramedRedstoneBlock(BlockModelGenerators blockModels)
     {
-        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_REDSTONE_BLOCK, TEXTURE, mcLocation("block/redstone_block"), $ -> {});
+        Identifier block = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_REDSTONE_BLOCK, TEXTURE, mcLocation("block/redstone_block"), _ -> {});
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_REDSTONE_BLOCK, block)
                 .addAuxModel(FramedMarkedCubeGeometry.FRAME_KEY, singleVariant(FramedMarkedCubeGeometry.REDSTONE_FRAME_LOCATION));
 
@@ -810,7 +810,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
         makeOverlayCube(blockModels, FramedTargetGeometry.OVERLAY_LOCATION, FramedTargetGeometry.OVERLAY_LOCATION, builder ->
                 builder.element(elem -> elem
                         .cube(TextureSlot.ALL)
-                        .faces((dir, face) -> face.tintindex(FramedTargetGeometry.OVERLAY_TINT_IDX))
+                        .faces((_, face) -> face.tintindex(FramedTargetGeometry.OVERLAY_TINT_IDX))
                 )
         );
     }
@@ -1027,7 +1027,7 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
     private void registerFramedOneWayWindow(BlockModelGenerators blockModels)
     {
-        Identifier model = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_ONE_WAY_WINDOW, TEXTURE, mcLocation("block/moss_block"), $ -> {});
+        Identifier model = makeUnderlayedCube(blockModels, FBContent.BLOCK_FRAMED_ONE_WAY_WINDOW, TEXTURE, mcLocation("block/moss_block"), _ -> {});
         simpleFramedBlockWithItem(blockModels, FBContent.BLOCK_FRAMED_ONE_WAY_WINDOW, model);
     }
 
@@ -1159,8 +1159,6 @@ public final class FramedBlockModelProvider extends AbstractFramedBlockModelProv
 
         blockModels.registerSimpleFlatItemModel(FBContent.BLOCK_FRAMED_COPPER_LANTERN.value().asItem());
     }
-
-
 
     private void registerFramingSaw(BlockModelGenerators blockModels)
     {

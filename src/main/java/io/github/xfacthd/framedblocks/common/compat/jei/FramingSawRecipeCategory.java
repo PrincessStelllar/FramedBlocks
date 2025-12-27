@@ -157,7 +157,7 @@ public final class FramingSawRecipeCategory implements IRecipeCategory<FramingSa
         );
 
         ItemStack inputStack = new ItemStack(input, calc.getInputCount());
-        ItemStack outputStack = recipe.getResult().copy();
+        ItemStack outputStack = recipe.getResultStack().copy();
         int outputCount = calc.getOutputCount();
         outputStack.setCount(outputCount);
 
@@ -166,7 +166,7 @@ public final class FramingSawRecipeCategory implements IRecipeCategory<FramingSa
         ContextMap context = SlotDisplayContext.fromLevel(Objects.requireNonNull(Minecraft.getInstance().level));
         for (FramingSawRecipeAdditive additive : additives)
         {
-            int addCount = additive.count() * (outputCount / recipe.getResult().getCount());
+            int addCount = additive.count() * (outputCount / recipe.getResult().count());
             List<ItemStack> additiveStacks = additive.ingredient()
                     .display()
                     .resolve(context, SlotDisplay.ItemStackContentsFactory.INSTANCE)

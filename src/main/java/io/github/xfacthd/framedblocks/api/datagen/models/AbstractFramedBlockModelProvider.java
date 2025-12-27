@@ -188,7 +188,7 @@ public abstract class AbstractFramedBlockModelProvider extends ModelProvider
 
     protected static void framedBlockItemModel(BlockModelGenerators blockModels, Holder<Block> block)
     {
-        framedBlockItemModel(blockModels, block, builder -> { });
+        framedBlockItemModel(blockModels, block, _ -> { });
     }
 
     protected static void framedBlockItemModel(BlockModelGenerators blockModels, Holder<Block> block, Consumer<FramedItemModelBuilder> builderConsumer)
@@ -247,7 +247,7 @@ public abstract class AbstractFramedBlockModelProvider extends ModelProvider
 
     protected static void makeOverlayCube(BlockModelGenerators blockModels, Identifier name, Identifier texture)
     {
-        makeOverlayCube(blockModels, name, texture, $ -> {});
+        makeOverlayCube(blockModels, name, texture, _ -> {});
     }
 
     protected static void makeOverlayCube(BlockModelGenerators blockModels, Identifier name, Identifier texture, Consumer<ExtendedModelTemplateBuilder> consumer)

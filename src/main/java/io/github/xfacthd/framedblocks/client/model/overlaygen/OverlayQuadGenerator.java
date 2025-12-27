@@ -6,8 +6,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.client.model.pipeline.QuadBakingVertexConsumer;
-import org.joml.Vector3f;
+import net.neoforged.neoforge.client.model.quad.MutableQuad;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,33 +46,18 @@ public final class OverlayQuadGenerator
 
     private static BakedQuad generateOverlayQuad(OverlayCacheKey key)
     {
-        QuadBakingVertexConsumer baker = new QuadBakingVertexConsumer();
+        MutableQuad quad = new MutableQuad();
 
-        TextureAtlasSprite sprite = key.sprite();
-        UVInfo uvInfo = UVInfo.get(key.face());
-        Vector3f scratch = new Vector3f();
-
-        baker.setDirection(key.face());
-        baker.setSprite(sprite);
-        baker.setHasAmbientOcclusion(true);
-        baker.setShade(true);
-
+        quad.setSprite(key.sprite());
+        quad.setDirection(key.face());
         for (int i = 0; i < 4; i++)
         {
-            key.pos(i, scratch);
-            baker.addVertex(scratch.x, scratch.y, scratch.z);
-
-            float uSrc = scratch.get(uvInfo.uIdx());
-            float vSrc = scratch.get(uvInfo.vIdx());
-            float u = uvInfo.uInv() ? (1F - uSrc) : uSrc;
-            float v = uvInfo.vInv() ? (1F - vSrc) : vSrc;
-            baker.setUv(sprite.getU(u), sprite.getV(v));
-
-            key.normal(i, scratch);
-            baker.setNormal(scratch.x, scratch.y, scratch.z).setColor(-1);
+            quad.setPosition(i, key.pos(i));
         }
+        quad.setNormal(key.normals());
+        quad.bakeUvsFromPosition();
 
-        return baker.bakeQuad();
+        return quad.toBakedQuad();
     }
 
     private static OverlayCacheKey buildCacheKey(BakedQuad quad, TextureAtlasSprite sprite)

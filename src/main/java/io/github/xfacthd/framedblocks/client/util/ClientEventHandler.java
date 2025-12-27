@@ -10,7 +10,5 @@ public final class ClientEventHandler
         FramingSawRecipeCache.get(true).clear();
     }
 
-
-
     private ClientEventHandler() { }
 }

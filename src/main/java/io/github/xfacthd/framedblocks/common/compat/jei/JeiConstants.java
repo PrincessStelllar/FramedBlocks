@@ -11,7 +11,5 @@ public final class JeiConstants
     public static final Component MSG_SUPPORTS_MOST_CAMOS = Utils.translate("msg", "camo_application.camo.most_supported")
             .withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC);
 
-
-
     private JeiConstants() { }
 }

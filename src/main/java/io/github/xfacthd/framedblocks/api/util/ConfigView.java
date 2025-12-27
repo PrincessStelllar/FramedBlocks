@@ -12,8 +12,6 @@ public final class ConfigView
     {
         Server INSTANCE = Utils.loadService(ConfigView.Server.class);
 
-
-
         /**
          * If true, blocks with {@code BlockEntities} can be placed in Framed blocks
          */
@@ -49,8 +47,6 @@ public final class ConfigView
     public interface Client
     {
         Client INSTANCE = Utils.loadService(ConfigView.Client.class);
-
-
 
         /**
          * If true, a placement preview will be rendered while holding a framed block
@@ -105,8 +101,6 @@ public final class ConfigView
     {
         DevTools INSTANCE = Utils.loadService(DevTools.class);
     }
-
-
 
     private ConfigView() { }
 }

@@ -281,7 +281,7 @@ public final class FramedBlockModel extends AbstractFramedBlockModel
         PartConsumer partConsumer = makePartConsumer(parts, cullMask, defaultAO, camoEmissive, forceEmissive, secondPart);
         boolean xformAll = geometry.transformAllQuads();
 
-        QuadListModifier modifier = (quadMap, quads, side) ->
+        QuadListModifier modifier = (quadMap, quads, _) ->
         {
             for (BakedQuad quad : quads)
             {

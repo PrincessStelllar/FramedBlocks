@@ -13,6 +13,7 @@ import io.github.xfacthd.framedblocks.api.model.standalone.StandaloneWrapperKey;
 import io.github.xfacthd.framedblocks.api.model.wrapping.GeometryFactory;
 import io.github.xfacthd.framedblocks.api.model.wrapping.ModelFactory;
 import io.github.xfacthd.framedblocks.api.model.wrapping.statemerger.StateMerger;
+import io.github.xfacthd.framedblocks.api.render.outline.OutlineRenderer;
 import io.github.xfacthd.framedblocks.api.util.Utils;
 import net.minecraft.client.renderer.block.model.BlockModelDefinition;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
@@ -37,8 +38,6 @@ import java.util.function.Supplier;
 public interface InternalClientAPI
 {
     InternalClientAPI INSTANCE = Utils.loadService(InternalClientAPI.class);
-
-
 
     void registerModelWrapper(Holder<Block> block, GeometryFactory geometryFactory, StateMerger stateMerger);
 
@@ -68,4 +67,6 @@ public interface InternalClientAPI
     );
 
     Supplier<BlockStateModel> createBlockItemModelProviderForGeometry(BlockState state, BlockState srcState, GeometryFactory geometry, ModelBaker baker);
+
+    OutlineRenderer<?> createModelBasedOutlineRenderer(Block block);
 }

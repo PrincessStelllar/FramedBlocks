@@ -23,7 +23,7 @@ public final class DeferredRecipeSerializerRegister extends DeferredRegister<Rec
     }
 
     @Override
-    @SuppressWarnings({ "unchecked", "NullableProblems" })
+    @SuppressWarnings("unchecked")
     protected <I extends RecipeSerializer<?>> DeferredHolder<RecipeSerializer<?>, I> createHolder(
             ResourceKey<? extends Registry<RecipeSerializer<?>>> registryKey, Identifier key
     )

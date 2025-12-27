@@ -46,8 +46,6 @@ public class FramedLargeButtonBlock extends FramedButtonBlock
         return state.getValue(FACE) != AttachFace.WALL;
     }
 
-
-
     public static VoxelShape getShape(BlockState state)
     {
         boolean pressed = state.getValue(POWERED);
@@ -90,8 +88,6 @@ public class FramedLargeButtonBlock extends FramedButtonBlock
                 20
         );
     }
-
-
 
     public static final class LargeButtonStateMerger implements StateMerger
     {

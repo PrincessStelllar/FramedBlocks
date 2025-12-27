@@ -42,7 +42,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignText;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -65,13 +64,6 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
     protected AbstractFramedSignBlock(BlockType type, Properties props)
     {
         super(type, props);
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
-    {
-        super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.WATERLOGGED);
     }
 
     @Override
@@ -220,8 +212,6 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
         return BlockUtils.createBlockEntityTicker(type, FBContent.BE_TYPE_FRAMED_SIGN.value(), FramedSignBlockEntity::tick);
     }
 
-
-
     private static boolean isBlockedByOtherPlayer(Player player, FramedSignBlockEntity sign)
     {
         UUID uuid = sign.getEditingPlayer();
@@ -245,16 +235,14 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
         }
     }
 
-
-
     private enum SignInteraction
     {
-        APPLY_DYE(SignText::hasMessage, (level, pos, player, stack, front, sign) ->
+        APPLY_DYE(SignText::hasMessage, (level, pos, _, stack, front, sign) ->
         {
             level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return sign.updateText(text -> text.setColor(((DyeItem) stack.getItem()).getDyeColor()), front);
         }),
-        APPLY_INK(SignText::hasMessage, (level, pos, player, stack, front, sign) ->
+        APPLY_INK(SignText::hasMessage, (level, pos, _, _, front, sign) ->
         {
             level.playSound(null, pos, SoundEvents.INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return sign.updateText(text -> text.setHasGlowingText(false), front);
@@ -268,7 +256,7 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
             }
             return sign.updateText(text -> text.setHasGlowingText(true), front);
         }),
-        APPLY_WAX((text, player) -> true, (level, pos, player, stack, front, sign) ->
+        APPLY_WAX((_, _) -> true, (level, _, _, _, _, sign) ->
         {
             if (sign.setWaxed(true))
             {
@@ -277,7 +265,7 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
             }
             return false;
         }),
-        REMOVE_WAX(SignText::hasMessage, (level, pos, player, stack, front, sign) ->
+        REMOVE_WAX(SignText::hasMessage, (level, _, _, _, _, sign) ->
         {
             if (sign.setWaxed(false))
             {
@@ -302,8 +290,6 @@ public abstract class AbstractFramedSignBlock extends FramedBlock
         {
             return predicate.canInteract(sign.getText(front), player) && action.apply(level, pos, player, stack, front, sign);
         }
-
-
 
         @Nullable
         public static SignInteraction from(ItemStack stack)

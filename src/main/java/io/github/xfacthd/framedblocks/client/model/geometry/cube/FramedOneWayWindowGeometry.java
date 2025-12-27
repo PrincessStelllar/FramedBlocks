@@ -80,8 +80,6 @@ public class FramedOneWayWindowGeometry extends Geometry
         return true;
     }
 
-
-
     private record OneWayWindowCacheKey(
             CamoContent<?> camo,
             @Nullable Object ctCtx,

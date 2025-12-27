@@ -284,8 +284,6 @@ public class FramedSignBlockEntity extends FramedBlockEntity
         readFromNbt(valueInput);
     }
 
-
-
     public static FramedSignBlockEntity normalSign(BlockPos pos, BlockState state)
     {
         return new FramedSignBlockEntity(FBContent.BE_TYPE_FRAMED_SIGN.value(), pos, state);

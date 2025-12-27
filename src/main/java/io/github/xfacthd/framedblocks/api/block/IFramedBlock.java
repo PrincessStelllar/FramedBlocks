@@ -75,6 +75,9 @@ public interface IFramedBlock extends EntityBlock, IBlockExtension
     String CAMO_LABEL_MULTI = Utils.translationKey("desc", "block.stored_camo_multi");
     Identifier DYNAMIC_DROPS = Utils.id("dynamic_drops");
 
+    /**
+     * @implNote The value returned by this method must either be constant or originate from a field that is initialized before super
+     */
     IBlockType getBlockType();
 
     static Block.Properties applyDefaultProperties(BlockBehaviour.Properties props, IBlockType type)
@@ -119,7 +122,6 @@ public interface IFramedBlock extends EntityBlock, IBlockExtension
             return;
         }
 
-        //noinspection ConstantConditions
         if (stack.get(DataComponents.BLOCK_ENTITY_DATA) != null)
         {
             if (level.getBlockEntity(pos) instanceof FramedBlockEntity be)
@@ -393,8 +395,7 @@ public interface IFramedBlock extends EntityBlock, IBlockExtension
 
     default boolean useCamoOcclusionShapeForLightOcclusion(BlockState state)
     {
-        //noinspection ConstantValue
-        if (getBlockType() != null && !getBlockType().canOccludeWithSolidCamo())
+        if (!getBlockType().canOccludeWithSolidCamo())
         {
             return false;
         }

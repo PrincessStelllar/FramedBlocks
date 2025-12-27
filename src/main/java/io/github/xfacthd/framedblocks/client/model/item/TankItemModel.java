@@ -60,6 +60,8 @@ public final class TankItemModel<T> implements ItemModel
             specialLayer.setUsesBlockLight(true);
             specialLayer.setTransform(baseModel.getItemTransforms().getTransform(ctx));
             specialLayer.setupSpecialModel(renderer, renderer.extractArgument(stack));
+
+            state.appendModelIdentityElement(fluid);
         }
     }
 

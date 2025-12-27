@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
 public class FramedCheckeredSlabSegmentBlock extends FramedBlock
@@ -32,7 +31,7 @@ public class FramedCheckeredSlabSegmentBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FramedProperties.TOP, PropertyHolder.SECOND, BlockStateProperties.WATERLOGGED);
+        builder.add(FramedProperties.TOP, PropertyHolder.SECOND);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class FramedCheckeredSlabSegmentBlock extends FramedBlock
         return PlacementStateBuilder.of(this, ctx)
                 .withTop()
                 .withCustom((state, modCtx) -> state.setValue(
-                        PropertyHolder.SECOND, Utils.isX(ctx.getHorizontalDirection())
+                        PropertyHolder.SECOND, Utils.isX(modCtx.getHorizontalDirection())
                 ))
                 .withWater()
                 .build();

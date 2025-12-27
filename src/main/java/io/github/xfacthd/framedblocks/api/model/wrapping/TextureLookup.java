@@ -11,8 +11,6 @@ public interface TextureLookup
 {
     TextureAtlasSprite get(Identifier id);
 
-
-
     static TextureLookup bindSpriteGetter(SpriteGetter getter, ModelDebugName debugName)
     {
         return id -> getter.get(new Material(ClientUtils.BLOCK_ATLAS, id), debugName);

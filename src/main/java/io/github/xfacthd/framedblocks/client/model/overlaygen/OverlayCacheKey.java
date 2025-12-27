@@ -3,7 +3,6 @@ package io.github.xfacthd.framedblocks.client.model.overlaygen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.neoforged.neoforge.client.model.quad.BakedNormals;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
 record OverlayCacheKey(
@@ -16,20 +15,15 @@ record OverlayCacheKey(
         TextureAtlasSprite sprite
 )
 {
-    public void pos(int vert, Vector3f out)
+    public Vector3fc pos(int vert)
     {
-        out.set(switch (vert)
+        return switch (vert)
         {
             case 0 -> pos0;
             case 1 -> pos1;
             case 2 -> pos2;
             case 3 -> pos3;
             default -> throw new IndexOutOfBoundsException(vert);
-        });
-    }
-
-    public void normal(int vert, Vector3f out)
-    {
-        BakedNormals.unpack(normals.normal(vert), out);
+        };
     }
 }

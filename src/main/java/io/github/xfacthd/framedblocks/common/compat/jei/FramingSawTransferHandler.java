@@ -97,8 +97,6 @@ public abstract sealed class FramingSawTransferHandler<C extends AbstractContain
         return transferHelper.createUserErrorWithTooltip(JeiConstants.MSG_INVALID_RECIPE);
     }
 
-
-
     public static final class FramingSaw extends FramingSawTransferHandler<FramingSawMenu>
     {
         public FramingSaw(IRecipeTransferHandlerHelper transferHelper)

@@ -24,7 +24,7 @@ public interface OverlayPartGenerator
      */
     default void generate(@Nullable Direction[] cullFaces, TextureAtlasSprite sprite, ChunkSectionLayer chunkLayer, @Nullable BlockState shaderState)
     {
-        generate(cullFaces, dir -> sprite, sprite, dir -> true, chunkLayer, shaderState);
+        generate(cullFaces, _ -> sprite, sprite, _ -> true, chunkLayer, shaderState);
     }
 
     /**
@@ -45,7 +45,7 @@ public interface OverlayPartGenerator
             @Nullable BlockState shaderState
     )
     {
-        generate(cullFaces, dir -> sprite, sprite, normalFilter, chunkLayer, shaderState);
+        generate(cullFaces, _ -> sprite, sprite, normalFilter, chunkLayer, shaderState);
     }
 
     /**
@@ -66,7 +66,7 @@ public interface OverlayPartGenerator
             @Nullable BlockState shaderState
     )
     {
-        generate(cullFaces, spriteGetter, primarySprite, dir -> true, chunkLayer, shaderState);
+        generate(cullFaces, spriteGetter, primarySprite, _ -> true, chunkLayer, shaderState);
     }
 
     /**
@@ -88,8 +88,6 @@ public interface OverlayPartGenerator
             ChunkSectionLayer chunkLayer,
             @Nullable BlockState shaderState
     );
-
-
 
     interface SpriteGetter extends Function<Direction, TextureAtlasSprite>
     {

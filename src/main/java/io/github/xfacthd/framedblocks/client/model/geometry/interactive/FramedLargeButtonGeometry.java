@@ -97,8 +97,6 @@ public class FramedLargeButtonGeometry extends Geometry
         return useBaseModel;
     }
 
-
-
     private static Direction getFacing(Direction dir, AttachFace face)
     {
         return switch (face)

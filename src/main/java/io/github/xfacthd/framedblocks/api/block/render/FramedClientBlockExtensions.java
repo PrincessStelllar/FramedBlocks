@@ -83,8 +83,6 @@ public class FramedClientBlockExtensions implements IClientBlockExtensions
         return false;
     }
 
-
-
     protected static boolean suppressParticles(BlockState state, Level level, BlockPos pos)
     {
         if (state.getBlock() instanceof IFramedBlock block && block.getBlockType().allowMakingIntangible())

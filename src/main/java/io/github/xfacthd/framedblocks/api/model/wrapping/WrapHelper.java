@@ -187,7 +187,5 @@ public final class WrapHelper
         InternalClientAPI.INSTANCE.registerStandaloneModelWrapper(wrapperKey, blockGeometryFactory, modelFactory, stateMerger);
     }
 
-
-
     private WrapHelper() { }
 }

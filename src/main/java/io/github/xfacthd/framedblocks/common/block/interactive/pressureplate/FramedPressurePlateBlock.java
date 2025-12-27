@@ -61,8 +61,8 @@ public class FramedPressurePlateBlock extends PressurePlateBlock implements IFra
 
     protected FramedPressurePlateBlock(BlockType type, BlockSetType blockSet, Properties props)
     {
-        super(blockSet, props);
         this.blockType = type;
+        super(blockSet, props);
         BlockUtils.configureStandardProperties(this);
     }
 
@@ -70,7 +70,7 @@ public class FramedPressurePlateBlock extends PressurePlateBlock implements IFra
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        BlockUtils.addRequiredProperties(builder);
+        BlockUtils.addStandardProperties(this, builder);
     }
 
     @Override
@@ -167,8 +167,6 @@ public class FramedPressurePlateBlock extends PressurePlateBlock implements IFra
     {
         return defaultBlockState();
     }
-
-
 
     public static FramedPressurePlateBlock wood(Properties props)
     {

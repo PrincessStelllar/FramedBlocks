@@ -97,8 +97,6 @@ public class FramedSlopePanelGeometry extends Geometry
         }
     }
 
-
-
     public static boolean isVerticalSlopeQuad(HorizontalRotation rotation, Direction face)
     {
         return switch (rotation)

@@ -177,7 +177,7 @@ public final class AppearanceHelper
 
         if (cfgMode == ConTexMode.DETAILED && !queryPos.equals(pos))
         {
-            Direction detEdge = findFirstSuitableDirectionFromOffset(pos, queryPos, side, modelData, (ctx, testSide, testEdge) ->
+            Direction detEdge = findFirstSuitableDirectionFromOffset(pos, queryPos, side, modelData, (ctx, _, testEdge) ->
                     ctx.isSideHidden(testEdge)
             );
             if (detEdge != null && stateCache.canConnectDetailed(side, detEdge))
@@ -212,7 +212,7 @@ public final class AppearanceHelper
                 return edge;
             }
         }
-        return findFirstSuitableDirectionFromOffset(pos, queryPos, side, null, ($1, $2, $3) -> true);
+        return findFirstSuitableDirectionFromOffset(pos, queryPos, side, null, (_, _, _) -> true);
     }
 
     /**

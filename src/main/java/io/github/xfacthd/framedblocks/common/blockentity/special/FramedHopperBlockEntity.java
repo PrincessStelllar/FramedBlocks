@@ -52,7 +52,6 @@ public class FramedHopperBlockEntity extends FramedBlockEntity implements Hopper
         }
 
         @Override
-        @SuppressWarnings("NullableProblems")
         protected void revertToSnapshot(Integer snapshot) {
             cooldownTime = snapshot;
         }
@@ -137,7 +136,7 @@ public class FramedHopperBlockEntity extends FramedBlockEntity implements Hopper
         ResourceHandler<ItemResource> itemHandler = containerOrHandler.itemHandler();
         if (itemHandler != null && !ResourceHandlerUtil.isFull(itemHandler))
         {
-            return ejectItemsInto(itemHandler, side, (src, dest, stack, destSide) ->
+            return ejectItemsInto(itemHandler, side, (_, dest, stack, _) ->
             {
                 try (Transaction tx = Transaction.open(null))
                 {

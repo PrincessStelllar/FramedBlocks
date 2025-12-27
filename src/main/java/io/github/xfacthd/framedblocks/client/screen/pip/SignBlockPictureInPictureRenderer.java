@@ -14,11 +14,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
 import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
@@ -64,7 +64,7 @@ public final class SignBlockPictureInPictureRenderer extends PictureInPictureRen
                 bufferSource,
                 renderer.getBlockModel(state.signState),
                 RANDOM,
-                LightTexture.FULL_BRIGHT,
+                LightCoordsUtil.UI_FULL_BRIGHT,
                 OverlayTexture.NO_OVERLAY
         );
 

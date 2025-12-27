@@ -12,7 +12,5 @@ public interface ModelFactory
 
     default void reset() { }
 
-
-
     record Context(BlockState state, BlockStateModel.UnbakedRoot baseModel, Map<String, SingleVariant.Unbaked> auxModels) { }
 }

@@ -63,8 +63,6 @@ public class FramedDoorGeometry extends Geometry
         return iron;
     }
 
-
-
     public static FramedDoorGeometry wood(GeometryFactory.Context ctx)
     {
         return new FramedDoorGeometry(ctx, false);

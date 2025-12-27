@@ -1,7 +1,6 @@
 package io.github.xfacthd.framedblocks.common.block.door;
 
 import io.github.xfacthd.framedblocks.api.block.BlockUtils;
-import io.github.xfacthd.framedblocks.api.block.FramedProperties;
 import io.github.xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import io.github.xfacthd.framedblocks.api.util.Utils;
 import io.github.xfacthd.framedblocks.common.FBContent;
@@ -57,8 +56,7 @@ public class FramedGateBlock extends FramedBlock
                 BlockStateProperties.HORIZONTAL_FACING,
                 BlockStateProperties.DOOR_HINGE,
                 BlockStateProperties.OPEN,
-                BlockStateProperties.POWERED,
-                FramedProperties.SOLID
+                BlockStateProperties.POWERED
         );
     }
 
@@ -194,8 +192,6 @@ public class FramedGateBlock extends FramedBlock
     {
         return defaultBlockState();
     }
-
-
 
     public static FramedGateBlock wood(Properties props)
     {

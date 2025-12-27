@@ -72,7 +72,7 @@ public class FramedSignScreen extends Screen
     @Override
     protected void init()
     {
-        addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, btn -> minecraft.setScreen(null))
+        addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, _ -> minecraft.setScreen(null))
                 .pos(width / 2 - 100, height / 4 + 144)
                 .size(200, 20)
                 .build()

@@ -115,8 +115,6 @@ public class FramedTrapDoorGeometry extends Geometry
         return iron;
     }
 
-
-
     public static FramedTrapDoorGeometry wood(GeometryFactory.Context ctx)
     {
         return new FramedTrapDoorGeometry(ctx, false);

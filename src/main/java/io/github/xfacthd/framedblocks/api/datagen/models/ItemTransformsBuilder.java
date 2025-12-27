@@ -77,8 +77,6 @@ final class ItemTransformsBuilder
         return new ItemTransforms(thirdPersonLeftHand, thirdPersonRightHand, firstPersonLeftHand, firstPersonRightHand, head, gui, ground, fixed, fixedFromBottom, ImmutableMap.of());
     }
 
-
-
     public static final class TransformBuilder
     {
         private Vector3f rotation = ItemTransform.Deserializer.DEFAULT_ROTATION;

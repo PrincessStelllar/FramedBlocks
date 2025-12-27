@@ -18,9 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.IntFunction;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.function.ToIntBiFunction;
 
 public enum FrameModifier implements StringRepresentable
 {
@@ -60,13 +58,13 @@ public enum FrameModifier implements StringRepresentable
     public static final StreamCodec<ByteBuf, FrameModifier> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, FrameModifier::ordinal);
 
     private final String name = toString().toLowerCase(Locale.ROOT);
-    private final Predicate<FramedBlockEntity> flagGetter;
+    private final FlagGetter flagGetter;
     private final FlagSetter flagSetter;
     private final ItemPredicate itemPredicate;
     private final Supplier<ItemResource> defaultResourceProvider;
-    private final ToIntBiFunction<BlueprintCopyBehaviour, BlueprintData> blueprintReader;
+    private final BlueprintReader blueprintReader;
 
-    FrameModifier(Predicate<FramedBlockEntity> flagGetter, FlagSetter flagSetter, ItemPredicate itemPredicate, Supplier<ItemResource> defaultResourceProvider, ToIntBiFunction<BlueprintCopyBehaviour, BlueprintData> blueprintReader)
+    FrameModifier(FlagGetter flagGetter, FlagSetter flagSetter, ItemPredicate itemPredicate, Supplier<ItemResource> defaultResourceProvider, BlueprintReader blueprintReader)
     {
         this.flagGetter = flagGetter;
         this.flagSetter = flagSetter;
@@ -77,7 +75,7 @@ public enum FrameModifier implements StringRepresentable
 
     public boolean isActive(FramedBlockEntity be)
     {
-        return flagGetter.test(be);
+        return flagGetter.getFlag(be);
     }
 
     public void setActive(FramedBlockEntity be, boolean active)
@@ -112,7 +110,7 @@ public enum FrameModifier implements StringRepresentable
 
     public void collectForBlueprint(BlueprintCopyBehaviour behaviour, BlueprintData data, List<ItemStack> output)
     {
-        int count = blueprintReader.applyAsInt(behaviour, data);
+        int count = blueprintReader.getCount(behaviour, data);
         if (count > 0)
         {
             output.add(getDefaultStack(count));
@@ -161,8 +159,21 @@ public enum FrameModifier implements StringRepresentable
         return null;
     }
 
+    @FunctionalInterface
+    private interface FlagGetter
+    {
+        boolean getFlag(FramedBlockEntity be);
+    }
+
+    @FunctionalInterface
     private interface FlagSetter
     {
         void setFlag(FramedBlockEntity be, boolean flag);
+    }
+
+    @FunctionalInterface
+    private interface BlueprintReader
+    {
+        int getCount(BlueprintCopyBehaviour behaviour, BlueprintData data);
     }
 }

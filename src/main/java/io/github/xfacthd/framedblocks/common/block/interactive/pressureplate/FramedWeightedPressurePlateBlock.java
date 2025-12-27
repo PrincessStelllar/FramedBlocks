@@ -48,8 +48,8 @@ public class FramedWeightedPressurePlateBlock extends WeightedPressurePlateBlock
 
     protected FramedWeightedPressurePlateBlock(BlockType type, int maxWeight, BlockSetType blockSet, Properties props)
     {
-        super(maxWeight, blockSet, props);
         this.type = type;
+        super(maxWeight, blockSet, props);
         BlockUtils.configureStandardProperties(this);
     }
 
@@ -57,7 +57,7 @@ public class FramedWeightedPressurePlateBlock extends WeightedPressurePlateBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        BlockUtils.addRequiredProperties(builder);
+        BlockUtils.addStandardProperties(this, builder);
     }
 
     @Override
@@ -145,8 +145,6 @@ public class FramedWeightedPressurePlateBlock extends WeightedPressurePlateBlock
         return defaultBlockState();
     }
 
-
-
     public static FramedWeightedPressurePlateBlock gold(Properties props)
     {
         return new FramedWeightedPressurePlateBlock(
@@ -196,8 +194,6 @@ public class FramedWeightedPressurePlateBlock extends WeightedPressurePlateBlock
                         .strength(0.5F)
         );
     }
-
-
 
     public static final class WeightedStateMerger implements StateMerger
     {

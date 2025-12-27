@@ -57,6 +57,8 @@ public class FramedLadderGeometry extends Geometry
                 rungMod.derive().apply(Modifiers.setPosition(height))
                         .export(quadMap.get(null));
             }
+
+            rungMod.discard();
         }
         else if (quadDir.getAxis() == dir.getAxis())
         {
@@ -87,10 +89,10 @@ public class FramedLadderGeometry extends Geometry
             QuadModifier mod = QuadModifier.of(quad)
                     .apply(Modifiers.cut(dir.getOpposite(), RUNG_DEPTH * 2F));
 
-            mod.export(quadMap.get(quadDir));
-
             mod.derive().apply(Modifiers.setPosition(RUNG_DEPTH * 2F))
                     .export(quadMap.get(null));
+
+            mod.export(quadMap.get(quadDir));
         }
     }
 

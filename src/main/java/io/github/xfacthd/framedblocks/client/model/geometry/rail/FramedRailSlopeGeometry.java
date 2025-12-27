@@ -51,8 +51,6 @@ public class FramedRailSlopeGeometry extends FramedSlopeGeometry
                 .setValue(FramedProperties.Y_SLOPE, ySlope);
     }
 
-
-
     public static FramedRailSlopeGeometry normal(GeometryFactory.Context ctx)
     {
         return new FramedRailSlopeGeometry(ctx, Blocks.RAIL.defaultBlockState(), BlockStateProperties.RAIL_SHAPE);

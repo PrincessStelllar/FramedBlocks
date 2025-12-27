@@ -120,7 +120,7 @@ public class FramedFlowerPotGeometry extends Geometry
         if (!potState.isAir())
         {
             BlockStateModel potModel = ModelUtils.getModel(potState);
-            consumer.acceptAll(potModel, level, pos, random, potState, true, false, false, false, potState, (quadMap, quads, side) ->
+            consumer.acceptAll(potModel, level, pos, random, potState, true, false, false, false, potState, (_, quads, _) ->
                     quads.removeIf(quad -> ClientUtils.isTexture(quad, POT_TEXTURE) || ClientUtils.isTexture(quad, DIRT_TEXTURE))
             );
         }

@@ -186,8 +186,6 @@ public class FramedOneWayWindowBlock extends FramedBlock
         return state.setValue(PropertyHolder.NULLABLE_FACE, NullableDirection.EAST);
     }
 
-
-
     public static boolean isOwnedBy(BlockGetter level, BlockPos pos, Player player)
     {
         if (!ServerConfig.VIEW.isOneWayWindowOwnable())

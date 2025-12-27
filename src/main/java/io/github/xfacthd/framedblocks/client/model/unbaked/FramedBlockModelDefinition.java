@@ -48,7 +48,7 @@ public record FramedBlockModelDefinition(
                 variant ->
                 {
                     BlockStateModel.UnbakedRoot variantRoot = variant.asRoot();
-                    return new IdentityHashMap<>(Maps.toMap(states.getPossibleStates(), state -> variantRoot));
+                    return new IdentityHashMap<>(Maps.toMap(states.getPossibleStates(), _ -> variantRoot));
                 }
         );
 

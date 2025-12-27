@@ -1,6 +1,5 @@
 package io.github.xfacthd.framedblocks.common.block.pillar;
 
-import io.github.xfacthd.framedblocks.api.block.FramedProperties;
 import io.github.xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import io.github.xfacthd.framedblocks.common.block.FramedBlock;
 import io.github.xfacthd.framedblocks.common.data.BlockType;
@@ -23,7 +22,7 @@ public class FramedPillarSocketBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.FACING);
     }
 
     @Nullable

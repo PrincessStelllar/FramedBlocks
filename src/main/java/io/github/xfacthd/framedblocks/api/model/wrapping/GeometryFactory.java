@@ -8,8 +8,6 @@ public interface GeometryFactory
 {
     Geometry create(Context ctx);
 
-
-
     record Context(BlockState state, BlockStateModel baseModel, AuxModelProvider auxModels, TextureLookup textureLookup)
     {
         public Context withState(BlockState newState)

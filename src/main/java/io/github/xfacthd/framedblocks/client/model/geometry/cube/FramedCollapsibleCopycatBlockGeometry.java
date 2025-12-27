@@ -67,7 +67,7 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
         {
             if (offsets[NORTH] > 0 || offsets[SOUTH] > 0)
             {
-                FloatPair length = getLenghts(offsets[NORTH], offsets[SOUTH]);
+                FloatPair length = getLengths(offsets[NORTH], offsets[SOUTH]);
                 if (length.valOne > 0F)
                 {
                     mods.add(initialModifier
@@ -83,6 +83,10 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
                             .apply(Modifiers.offset(Direction.NORTH, offsets[SOUTH] / 16F))
                     );
                 }
+                else
+                {
+                    initialModifier.discard();
+                }
             }
             else
             {
@@ -91,7 +95,7 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
 
             if (offsets[EAST] > 0 || offsets[WEST] > 0)
             {
-                FloatPair length = getLenghts(offsets[WEST], offsets[EAST]);
+                FloatPair length = getLengths(offsets[WEST], offsets[EAST]);
                 for (QuadModifier modifier : mods)
                 {
                     if (length.valOne > 0F)
@@ -106,6 +110,10 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
                         modifier.apply(Modifiers.cut(Direction.WEST, length.valTwo))
                                 .apply(Modifiers.offset(Direction.WEST, offsets[EAST] / 16F))
                                 .export(quadMap.get(solid ? quadDir : null));
+                    }
+                    else
+                    {
+                        modifier.discard();
                     }
                 }
             }
@@ -125,7 +133,7 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
             int axisMax = xAxis ? SOUTH : EAST;
             if (offsets[axisMin] > 0 || offsets[axisMax] > 0)
             {
-                FloatPair length = getLenghts(offsets[axisMin], offsets[axisMax]);
+                FloatPair length = getLengths(offsets[axisMin], offsets[axisMax]);
                 if (length.valOne > 0F)
                 {
                     mods.add(initialModifier
@@ -141,6 +149,10 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
                             .apply(Modifiers.offset(axisNeg, offsets[axisMax] / 16F))
                     );
                 }
+                else
+                {
+                    initialModifier.discard();
+                }
             }
             else
             {
@@ -149,7 +161,7 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
 
             if (offsets[DOWN] > 0 || offsets[UP] > 0)
             {
-                FloatPair length = getLenghts(offsets[DOWN], offsets[UP]);
+                FloatPair length = getLengths(offsets[DOWN], offsets[UP]);
                 for (QuadModifier modifier : mods)
                 {
                     if (length.valOne > 0F)
@@ -165,6 +177,10 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
                                 .apply(Modifiers.offset(Direction.DOWN, offsets[UP] / 16F))
                                 .export(quadMap.get(solid ? quadDir : null));
                     }
+                    else
+                    {
+                        modifier.discard();
+                    }
                 }
             }
             else
@@ -177,7 +193,7 @@ public class FramedCollapsibleCopycatBlockGeometry extends Geometry
         }
     }
 
-    private static FloatPair getLenghts(int offsetMin, int offsetMax)
+    private static FloatPair getLengths(int offsetMin, int offsetMax)
     {
         float length = (16 - offsetMin - offsetMax) / 2F;
         boolean ceilFirst = offsetMin > offsetMax;

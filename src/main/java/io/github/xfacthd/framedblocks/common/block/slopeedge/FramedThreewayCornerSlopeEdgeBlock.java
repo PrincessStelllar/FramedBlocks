@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
 public class FramedThreewayCornerSlopeEdgeBlock extends FramedBlock
@@ -42,7 +41,7 @@ public class FramedThreewayCornerSlopeEdgeBlock extends FramedBlock
         super.createBlockStateDefinition(builder);
         builder.add(
                 FramedProperties.FACING_HOR, FramedProperties.TOP, PropertyHolder.RIGHT,
-                PropertyHolder.ALT_TYPE, FramedProperties.Y_SLOPE, BlockStateProperties.WATERLOGGED
+                PropertyHolder.ALT_TYPE, FramedProperties.Y_SLOPE
         );
     }
 

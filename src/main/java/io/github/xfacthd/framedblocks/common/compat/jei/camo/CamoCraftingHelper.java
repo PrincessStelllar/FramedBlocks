@@ -12,9 +12,9 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotRichTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -102,11 +102,9 @@ public final class CamoCraftingHelper
 
     public ItemStack calculateOutput(ItemStack frame, ItemStack inputOne, ItemStack inputTwo)
     {
-        RegistryAccess registryAccess = Objects.requireNonNull(Minecraft.getInstance().level).registryAccess();
-
         ItemStack copyToolItem = helperRecipe.getCopyTool().display().resolveForFirstStack(makeSlotDisplayContext());
         CraftingInput craftingInput = CraftingInput.of(2, 2, List.of(frame, copyToolItem, inputOne, inputTwo));
-        return helperRecipe.assemble(craftingInput, registryAccess);
+        return helperRecipe.assemble(craftingInput);
     }
 
     private List<ItemStack> getCamoExampleStacks(Ingredient ingredient, int count)
@@ -199,7 +197,7 @@ public final class CamoCraftingHelper
             slotBuilder.addRichTooltipCallback(tooltipCallback);
         }
 
-        Optional<ItemStack> result = recipe.result();
+        Optional<ItemStack> result = recipe.result().map(ItemStackTemplate::create);
         if (result.isEmpty())
         {
             // For bookmarking, the recipe must have at least one known output.
@@ -229,6 +227,7 @@ public final class CamoCraftingHelper
         if (stacks.isEmpty()) return SlotDisplay.Empty.INSTANCE;
 
         List<SlotDisplay> displays = stacks.stream()
+                .map(ItemStackTemplate::fromNonEmptyStack)
                 .map(SlotDisplay.ItemStackSlotDisplay::new)
                 .map(SlotDisplay.class::cast)
                 .toList();

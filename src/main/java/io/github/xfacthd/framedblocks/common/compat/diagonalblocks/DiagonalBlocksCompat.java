@@ -66,11 +66,11 @@ public final class DiagonalBlocksCompat
         {
             DiagonalBlockTypes.FENCE.registerBlockFactory(
                     Utils.getKeyOrThrow(FBContent.BLOCK_FRAMED_FENCE).identifier(),
-                    block -> FramedDiagonalFenceBlock::new
+                    _ -> FramedDiagonalFenceBlock::new
             );
             DiagonalBlockTypes.WINDOW.registerBlockFactory(
                     Utils.getKeyOrThrow(FBContent.BLOCK_FRAMED_PANE).identifier(),
-                    block -> FramedDiagonalGlassPaneBlock::new
+                    _ -> FramedDiagonalGlassPaneBlock::new
             );
             DiagonalBlockTypes.WINDOW.disableBlockFactory(Utils.getKeyOrThrow(FBContent.BLOCK_FRAMED_BARS).identifier());
             DiagonalBlockTypes.WALL.disableBlockFactory(Utils.getKeyOrThrow(FBContent.BLOCK_FRAMED_WALL).identifier());

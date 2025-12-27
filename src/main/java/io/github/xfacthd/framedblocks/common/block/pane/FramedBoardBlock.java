@@ -1,6 +1,5 @@
 package io.github.xfacthd.framedblocks.common.block.pane;
 
-import io.github.xfacthd.framedblocks.api.block.FramedProperties;
 import io.github.xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import io.github.xfacthd.framedblocks.api.camo.CamoList;
 import io.github.xfacthd.framedblocks.api.util.Utils;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
 public class FramedBoardBlock extends FramedBlock
@@ -47,7 +45,7 @@ public class FramedBoardBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(PropertyHolder.FACES, BlockStateProperties.WATERLOGGED, FramedProperties.SOLID);
+        builder.add(PropertyHolder.FACES);
     }
 
     @Override

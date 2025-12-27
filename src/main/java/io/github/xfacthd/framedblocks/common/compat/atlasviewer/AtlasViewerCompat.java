@@ -32,8 +32,6 @@ public final class AtlasViewerCompat
         }
     }
 
-
-
     private static final class GuardedClientAccess
     {
         public static void init(IEventBus modBus)
@@ -60,11 +58,8 @@ public final class AtlasViewerCompat
             });
         }
 
-
-
         private GuardedClientAccess() { }
     }
-
 
     private AtlasViewerCompat() { }
 }

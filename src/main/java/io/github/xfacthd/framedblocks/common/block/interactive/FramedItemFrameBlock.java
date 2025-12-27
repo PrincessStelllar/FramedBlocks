@@ -54,8 +54,8 @@ public class FramedItemFrameBlock extends FramedBlock
     {
         super(type, props, modProps -> modProps.instabreak()
                 .noCollision()
-                .isSuffocating((s, l, p) -> false)
-                .isViewBlocking((s, l, p) -> false)
+                .isSuffocating((_, _, _) -> false)
+                .isViewBlocking((_, _, _) -> false)
                 .sound(type == BlockType.FRAMED_ITEM_FRAME ? NORMAL_SOUND : GLOWING_SOUND)
         );
         registerDefaultState(defaultBlockState()
@@ -68,7 +68,7 @@ public class FramedItemFrameBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.FACING, PropertyHolder.LEATHER, PropertyHolder.MAP_FRAME, BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.FACING, PropertyHolder.LEATHER, PropertyHolder.MAP_FRAME);
     }
 
     @Override
@@ -216,7 +216,7 @@ public class FramedItemFrameBlock extends FramedBlock
         if (!level.isClientSide() && state.getValue(PropertyHolder.MAP_FRAME))
         {
             return BlockUtils.createBlockEntityTicker(
-                    type, FBContent.BE_TYPE_FRAMED_ITEM_FRAME.value(), (l, p, s, be) -> be.tickWithMap()
+                    type, FBContent.BE_TYPE_FRAMED_ITEM_FRAME.value(), (_, _, _, be) -> be.tickWithMap()
             );
         }
         return null;

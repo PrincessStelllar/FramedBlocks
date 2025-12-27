@@ -48,8 +48,6 @@ public class FramedMarkedPressurePlateGeometry extends FramedPressurePlateGeomet
         }
     }
 
-
-
     public static FramedPressurePlateGeometry stone(GeometryFactory.Context ctx)
     {
         boolean powered = ctx.state().getValue(PressurePlateBlock.POWERED);

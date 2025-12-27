@@ -1,6 +1,7 @@
 package io.github.xfacthd.framedblocks.client.screen.pip;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import io.github.xfacthd.framedblocks.api.render.RenderUtils;
 import io.github.xfacthd.framedblocks.api.util.SingleBlockFakeLevel;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.block.model.ItemTransform;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -60,10 +62,15 @@ public final class BlockPictureInPictureRenderer extends PictureInPictureRendere
                 state,
                 BlockPos.ZERO,
                 poseStack,
-                renderType -> bufferSource.getBuffer(RenderUtils.getEntityRenderType(renderType)),
+                this::getBuffer,
                 false,
                 OverlayTexture.NO_OVERLAY
         );
+    }
+
+    private VertexConsumer getBuffer(ChunkSectionLayer chunkLayer)
+    {
+        return bufferSource.getBuffer(RenderUtils.getEntityRenderType(chunkLayer));
     }
 
     @Override

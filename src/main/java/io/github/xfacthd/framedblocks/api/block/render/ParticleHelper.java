@@ -71,8 +71,6 @@ public final class ParticleHelper
         level.addParticle(options, x, entity.getY() + 0.1D, z, delta.x * -4D, 1.5D, delta.z * -4D);
     }
 
-
-
     public static final class Client
     {
         @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -148,12 +146,8 @@ public final class ParticleHelper
             }
         }
 
-
-
         private Client() { }
     }
-
-
 
     private ParticleHelper() { }
 }

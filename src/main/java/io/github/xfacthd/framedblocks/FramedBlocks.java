@@ -14,6 +14,7 @@ import io.github.xfacthd.framedblocks.common.data.BlueprintBehaviours;
 import io.github.xfacthd.framedblocks.common.data.DataMapsSetup;
 import io.github.xfacthd.framedblocks.common.data.StateCacheBuilder;
 import io.github.xfacthd.framedblocks.common.data.camo.CamoContainerFactories;
+import io.github.xfacthd.framedblocks.common.data.camo.block.rotator.BlockCamoRotators;
 import io.github.xfacthd.framedblocks.common.data.conpreds.ConnectionPredicates;
 import io.github.xfacthd.framedblocks.common.data.cullupdate.CullingUpdateTracker;
 import io.github.xfacthd.framedblocks.common.data.facepreds.FullFacePredicates;
@@ -62,6 +63,7 @@ public final class FramedBlocks
         NeoForge.EVENT_BUS.addListener(FramingSawRecipeCache::onDataPackSync);
         NeoForge.EVENT_BUS.addListener(FramingSawRecipeCache::onRecipesReceived);
         NeoForge.EVENT_BUS.addListener(DataMapsSetup::onDataMapsUpdated);
+        NeoForge.EVENT_BUS.addListener(BlockCamoRotators::onDefaultComponentsBound);
 
         if (!Utils.PRODUCTION)
         {

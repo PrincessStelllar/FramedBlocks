@@ -42,8 +42,6 @@ public class FramedMarkedCubeGeometry extends FramedCubeGeometry
         }
     }
 
-
-
     public static FramedCubeGeometry slime(GeometryFactory.Context ctx)
     {
         if (ClientConfig.VIEW.showSpecialCubeOverlay())

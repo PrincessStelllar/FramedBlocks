@@ -113,7 +113,5 @@ public final class BlockStateInfo
         return "present";
     }
 
-
-
     private BlockStateInfo() { }
 }

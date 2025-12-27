@@ -231,7 +231,5 @@ public final class ModelWrappingManager
                 .collect(Collectors.joining(", "));
     }
 
-
-
     private ModelWrappingManager() { }
 }

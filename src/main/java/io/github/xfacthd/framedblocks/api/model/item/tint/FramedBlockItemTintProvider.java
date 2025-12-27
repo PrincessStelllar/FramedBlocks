@@ -36,8 +36,6 @@ public class FramedBlockItemTintProvider implements DynamicItemTintProvider
         return -1;
     }
 
-
-
     public static FramedBlockItemTintProvider of(IFramedBlock block)
     {
         return block.getBlockType().isDoubleBlock() ? INSTANCE_DOUBLE : INSTANCE_SINGLE;

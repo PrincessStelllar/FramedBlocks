@@ -121,7 +121,7 @@ public class FramingSawWithEncoderScreen extends FramingSawScreen
         {
             FramingSawRecipe recipe = cache.getRecipes().get(menu.getSelectedRecipeIndex()).value();
 
-            ClientUtils.renderTransparentFakeItem(graphics, recipe.getResult(), leftPos + 223, topPos + 31);
+            ClientUtils.renderTransparentFakeItem(graphics, recipe.getResultStack(), leftPos + 223, topPos + 31);
             int count = Optionull.mapOrDefault(encoderCalculation, FramingSawRecipeCalculation::getOutputCount, 1);
             drawItemCount(graphics, count, leftPos + 223, topPos + 31);
 
@@ -252,7 +252,7 @@ public class FramingSawWithEncoderScreen extends FramingSawScreen
                         case FramingSawMenu.SLOT_RESULT -> menu.getRecipes()
                                 .get(menu.getSelectedRecipeIndex())
                                 .getRecipe()
-                                .getResult();
+                                .getResultStack();
                         default -> getAdditiveStack(i - 1);
                     };
                     if (!stack.isEmpty())

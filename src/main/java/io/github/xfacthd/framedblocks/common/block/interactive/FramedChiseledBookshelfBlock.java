@@ -56,7 +56,7 @@ public class FramedChiseledBookshelfBlock extends FramedBlock implements Selecta
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FramedProperties.FACING_HOR, FramedProperties.SOLID);
+        builder.add(FramedProperties.FACING_HOR);
         ChiseledBookShelfBlock.SLOT_OCCUPIED_PROPERTIES.forEach(builder::add);
     }
 
@@ -72,7 +72,6 @@ public class FramedChiseledBookshelfBlock extends FramedBlock implements Selecta
     {
         super.setPlacedBy(level, pos, state, placer, stack);
 
-        //noinspection ConstantConditions
         if (level.isClientSide() || stack.get(DataComponents.BLOCK_ENTITY_DATA) == null)
         {
             return;

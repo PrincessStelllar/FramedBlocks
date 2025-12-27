@@ -59,8 +59,8 @@ public class FramedDetectorRailSlopeBlock<BE extends FramedBlockEntity> extends 
 
     protected FramedDetectorRailSlopeBlock(BlockType type, Properties props, BlockEntityType.BlockEntitySupplier<BE> beFactory)
     {
-        super(IFramedBlock.applyDefaultProperties(props, type));
         this.type = type;
+        super(IFramedBlock.applyDefaultProperties(props, type));
         this.shapes = ShapeLookup.of(this);
         this.beFactory = beFactory;
         BlockUtils.configureStandardProperties(this);
@@ -77,8 +77,8 @@ public class FramedDetectorRailSlopeBlock<BE extends FramedBlockEntity> extends 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        BlockUtils.addRequiredProperties(builder);
-        builder.add(FramedProperties.SOLID, FramedProperties.Y_SLOPE);
+        BlockUtils.addStandardProperties(this, builder);
+        builder.add(FramedProperties.Y_SLOPE);
     }
 
     @Override
@@ -271,8 +271,6 @@ public class FramedDetectorRailSlopeBlock<BE extends FramedBlockEntity> extends 
     {
         return getItemModelSource();
     }
-
-
 
     public static FramedDetectorRailSlopeBlock<FramedBlockEntity> normal(Properties props)
     {

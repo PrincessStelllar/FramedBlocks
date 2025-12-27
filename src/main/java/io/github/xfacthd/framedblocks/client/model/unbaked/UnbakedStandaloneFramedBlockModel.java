@@ -56,7 +56,7 @@ public final class UnbakedStandaloneFramedBlockModel<T extends CachingModel> imp
         if (unbakedModels.isEmpty())
         {
             BlockStateModel missing = baker.compute(ModelUtils.MISSING_MODEL_KEY);
-            modelProvider = $ -> missing;
+            modelProvider = _ -> missing;
         }
         else
         {

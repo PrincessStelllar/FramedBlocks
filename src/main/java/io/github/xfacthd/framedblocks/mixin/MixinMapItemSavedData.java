@@ -38,10 +38,15 @@ public abstract class MixinMapItemSavedData implements FramedMap.MarkerRemover
     @Unique
     private final Map<String, FramedMap> framedblocks$frameMarkers = new HashMap<>();
 
-    @Shadow @Final private boolean trackingPosition;
+    @Shadow
+    @Final
+    private boolean trackingPosition;
 
-    @Shadow protected abstract void addDecoration(Holder<MapDecorationType> pType, @Nullable LevelAccessor pLevel, String pDecorationName, double pLevelX, double pLevelZ, double pRotation, @Nullable Component pName);
-    @Shadow protected abstract void removeDecoration(String pIdentifier);
+    @Shadow
+    @SuppressWarnings("SameParameterValue")
+    protected abstract void addDecoration(Holder<MapDecorationType> pType, @Nullable LevelAccessor pLevel, String pDecorationName, double pLevelX, double pLevelZ, double pRotation, @Nullable Component pName);
+    @Shadow
+    protected abstract void removeDecoration(String pIdentifier);
 
     @ModifyExpressionValue(method = "tickCarriedBy", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isFramed()Z", ordinal = 0))
     private boolean framedblocks$checkVanillaFramedOrCustomFramed(boolean isFramed, Player player, ItemStack stack)
@@ -59,7 +64,6 @@ public abstract class MixinMapItemSavedData implements FramedMap.MarkerRemover
     private void framedblocks$updateFramedItemFrameMarker(Player player, ItemStack mapStack, CallbackInfo ci)
     {
         FramedMap framedMap;
-        //noinspection ConstantConditions
         if (trackingPosition && (framedMap = mapStack.get(FBContent.DC_TYPE_FRAMED_MAP)) != null)
         {
             String frameId = FramedMap.makeFrameId(framedMap.pos());

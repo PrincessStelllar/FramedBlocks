@@ -1,9 +1,11 @@
-package io.github.xfacthd.framedblocks.api.render.outline;
+package io.github.xfacthd.framedblocks.client.render.special;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
 import io.github.xfacthd.framedblocks.api.model.util.ModelUtils;
 import io.github.xfacthd.framedblocks.api.model.wrapping.statemerger.StateMerger;
+import io.github.xfacthd.framedblocks.api.render.outline.OutlineRenderer;
+import io.github.xfacthd.framedblocks.api.render.outline.SimpleOutlineRenderer;
 import io.github.xfacthd.framedblocks.api.util.Utils;
 import io.github.xfacthd.framedblocks.client.model.wrapping.ModelWrappingHandler;
 import io.github.xfacthd.framedblocks.client.model.wrapping.ModelWrappingManager;
@@ -26,7 +28,6 @@ import net.minecraft.world.level.EmptyBlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.quad.BakedNormals;
-import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
@@ -48,7 +49,6 @@ import java.util.function.Consumer;
 public final class ModelBasedOutlineRenderer implements SimpleOutlineRenderer
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-    @ApiStatus.Internal
     public static final Identifier LISTENER_ID = Utils.id("model_based_outline_renderer");
     private static final List<ModelBasedOutlineRenderer> RENDERERS = new ArrayList<>();
     private static final @Nullable Direction[] DIRECTIONS = Arrays.copyOf(Direction.values(), 7);
@@ -79,7 +79,6 @@ public final class ModelBasedOutlineRenderer implements SimpleOutlineRenderer
     @Override
     public void rotateMatrix(PoseStack poseStack, BlockState state) { }
 
-    @ApiStatus.Internal
     public static void clearCaches()
     {
         RENDERERS.forEach(renderer -> renderer.cachedVertices.clear());
@@ -112,7 +111,7 @@ public final class ModelBasedOutlineRenderer implements SimpleOutlineRenderer
         Int2ObjectMap<Object2IntMap<Line>> linesByNormal = new Int2ObjectOpenHashMap<>();
         for (Quad quad : uniqueQuads)
         {
-            Object2IntMap<Line> lines = linesByNormal.computeIfAbsent(quad.normal, $ -> new Object2IntOpenHashMap<>());
+            Object2IntMap<Line> lines = linesByNormal.computeIfAbsent(quad.normal, _ -> new Object2IntOpenHashMap<>());
             appendEdge(quad.v0, quad.v1, lines);
             appendEdge(quad.v2, quad.v3, lines);
             appendEdge(quad.v0, quad.v3, lines);

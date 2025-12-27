@@ -2,7 +2,6 @@
   "type": "framedblocks:rotate_shape",
   "block": "framedblocks:framed_stairs",
   "result": {
-    "count": 1,
     "id": "framedblocks:framed_vertical_stairs"
   },
   "tool": "#c:tools/wrench"

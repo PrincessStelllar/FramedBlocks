@@ -21,6 +21,7 @@ import io.github.xfacthd.framedblocks.api.model.wrapping.GeometryFactory;
 import io.github.xfacthd.framedblocks.api.model.wrapping.ModelFactory;
 import io.github.xfacthd.framedblocks.api.model.wrapping.TextureLookup;
 import io.github.xfacthd.framedblocks.api.model.wrapping.statemerger.StateMerger;
+import io.github.xfacthd.framedblocks.api.render.outline.OutlineRenderer;
 import io.github.xfacthd.framedblocks.client.model.FramedBlockModelPart;
 import io.github.xfacthd.framedblocks.client.model.QuadMapImpl;
 import io.github.xfacthd.framedblocks.client.model.ReinforcementModel;
@@ -33,6 +34,7 @@ import io.github.xfacthd.framedblocks.client.model.unbaked.UnbakedFramedDoubleBl
 import io.github.xfacthd.framedblocks.client.model.wrapping.ModelWrappingHandler;
 import io.github.xfacthd.framedblocks.client.model.wrapping.ModelWrappingManager;
 import io.github.xfacthd.framedblocks.client.model.wrapping.StandaloneModelWrappingHandler;
+import io.github.xfacthd.framedblocks.client.render.special.ModelBasedOutlineRenderer;
 import io.github.xfacthd.framedblocks.client.util.ClientTaskQueue;
 import net.minecraft.client.renderer.block.model.BlockModelDefinition;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
@@ -143,5 +145,11 @@ public final class InternalClientApiImpl implements InternalClientAPI
             ReinforcementModel reinforcement = ReinforcementModel.getOrCreate(baker);
             return new FramedBlockModel(ctx, geometry.create(ctx), reinforcement);
         };
+    }
+
+    @Override
+    public OutlineRenderer<?> createModelBasedOutlineRenderer(Block block)
+    {
+        return new ModelBasedOutlineRenderer(block);
     }
 }

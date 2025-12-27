@@ -82,8 +82,7 @@ public class PoweredFramingSawScreen extends AbstractContainerScreen<PoweredFram
 
     public PoweredFramingSawScreen(PoweredFramingSawMenu menu, Inventory inv, Component title)
     {
-        super(menu, inv, title);
-        this.imageHeight = 182;
+        super(menu, inv, title, DEFAULT_IMAGE_WIDTH, 182);
         this.inventoryLabelY = imageHeight - 94;
         Level level = Objects.requireNonNull(minecraft.level);
         this.additiveResolver = new CachingIngredientResolver.Multi(level, FramingSawRecipe.MAX_ADDITIVE_COUNT);
@@ -134,7 +133,7 @@ public class PoweredFramingSawScreen extends AbstractContainerScreen<PoweredFram
 
         if (recipe != null)
         {
-            ItemStack result = recipe.getResult();
+            ItemStack result = recipe.getResultStack();
             ClientUtils.renderTransparentFakeItem(graphics, result, targetStackX, targetStackY);
 
             List<FramingSawRecipeAdditive> additives = recipe.getAdditives();
@@ -249,7 +248,6 @@ public class PoweredFramingSawScreen extends AbstractContainerScreen<PoweredFram
 
     private void renderHoveredItemTooltip(GuiGraphics graphics, int mouseX, int mouseY, ItemStack stack)
     {
-        //noinspection ConstantConditions
         List<Component> components = new ArrayList<>(getTooltipFromItem(minecraft, stack));
         Optional<TooltipComponent> tooltip = stack.getTooltipImage();
 

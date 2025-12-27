@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
 public class FramedFlatSlopeSlabCornerBlock extends FramedBlock
@@ -42,8 +41,8 @@ public class FramedFlatSlopeSlabCornerBlock extends FramedBlock
     {
         super.createBlockStateDefinition(builder);
         builder.add(
-                FramedProperties.FACING_HOR, FramedProperties.TOP, PropertyHolder.TOP_HALF, FramedProperties.SOLID,
-                BlockStateProperties.WATERLOGGED, FramedProperties.Y_SLOPE
+                FramedProperties.FACING_HOR, FramedProperties.TOP, PropertyHolder.TOP_HALF,
+                FramedProperties.Y_SLOPE
         );
     }
 
@@ -55,7 +54,7 @@ public class FramedFlatSlopeSlabCornerBlock extends FramedBlock
                 .withHalfFacing()
                 .withTop(PropertyHolder.TOP_HALF)
                 .withCustom((state, modCtx) ->
-                        state.setValue(FramedProperties.TOP, ctx.getPlayer() != null && ctx.getPlayer().isShiftKeyDown())
+                        state.setValue(FramedProperties.TOP, modCtx.getPlayer() != null && modCtx.getPlayer().isShiftKeyDown())
                 )
                 .withWater()
                 .build();

@@ -15,7 +15,6 @@ import io.github.xfacthd.framedblocks.api.util.Utils;
 import io.github.xfacthd.framedblocks.common.FBContent;
 import io.github.xfacthd.framedblocks.common.config.DevToolsConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
@@ -24,6 +23,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -78,10 +78,10 @@ public class DoubleBlockPartDebugRenderer implements BlockDebugRenderer<FramedDo
         VertexConsumer consumer = outlineBuffer.getBuffer(RenderTypes.outline(ClientUtils.BLOCK_ATLAS));
         ModelBlockRenderer.renderModel(
                 poseStack.last(),
-                type -> consumer,
+                _ -> consumer,
                 data.model,
                 1F, 1F, 1F,
-                LightTexture.FULL_BRIGHT,
+                LightCoordsUtil.FULL_BRIGHT,
                 OverlayTexture.NO_OVERLAY,
                 data.level,
                 BlockPos.ZERO,

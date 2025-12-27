@@ -35,7 +35,7 @@ public class FramedMiniCubeBlock extends FramedBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.ROTATION_16, FramedProperties.TOP, BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.ROTATION_16, FramedProperties.TOP);
     }
 
     @Override
@@ -89,8 +89,6 @@ public class FramedMiniCubeBlock extends FramedBlock
     {
         return defaultBlockState();
     }
-
-
 
     public static final class MiniCubeStateMerger implements StateMerger
     {

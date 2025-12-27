@@ -9,7 +9,6 @@ import io.github.xfacthd.framedblocks.common.block.sign.FramedStandingSignBlock;
 import io.github.xfacthd.framedblocks.common.blockentity.special.FramedSignBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.AbstractSignRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -18,6 +17,7 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.SignText;
 import net.minecraft.world.level.block.state.BlockState;
@@ -154,7 +154,7 @@ public class FramedSignRenderer implements BlockEntityRenderer<FramedSignBlockEn
         {
             textColor = text.getColor().getTextColor();
             outline = textColor == DyeColor.BLACK.getTextColor() || outlineVisible;
-            textLight = LightTexture.FULL_BRIGHT;
+            textLight = LightCoordsUtil.FULL_BRIGHT;
         }
         else
         {

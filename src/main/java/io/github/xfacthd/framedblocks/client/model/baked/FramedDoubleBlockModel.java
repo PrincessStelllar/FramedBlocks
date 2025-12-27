@@ -79,6 +79,7 @@ public final class FramedDoubleBlockModel extends AbstractFramedBlockModel
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public TextureAtlasSprite particleIcon(BlockAndTintGetter level, BlockPos pos, BlockState state)
     {
         AbstractFramedBlockData fbData = level.getModelData(pos).get(AbstractFramedBlockData.PROPERTY);
@@ -100,7 +101,6 @@ public final class FramedDoubleBlockModel extends AbstractFramedBlockModel
                     yield sprite;
                 }
 
-                //noinspection deprecation
                 yield delegate.particleIcon();
             }
         };
@@ -123,10 +123,10 @@ public final class FramedDoubleBlockModel extends AbstractFramedBlockModel
      * Returns the camo-dependent particle texture of the side given by {@code key} when the camo is not air,
      * else returns the basic "framed block" sprite
      */
+    @SuppressWarnings("deprecation")
     private TextureAtlasSprite getSpriteOrDefault(BlockAndTintGetter level, BlockPos pos, BlockState state, @Nullable AbstractFramedBlockData data, boolean secondary)
     {
         TextureAtlasSprite sprite = getSprite(level, pos, state, data, secondary);
-        //noinspection deprecation
         return sprite != null ? sprite : delegate.particleIcon();
     }
 

@@ -88,7 +88,7 @@ public final class ModelPerformanceTest
                 long timeEmpty = testModel(state, makeModelData(state, EmptyCamoContainer.EMPTY, false));
                 long timeCamo = stone ? 0 : testModel(state, makeModelData(state, TEST_CAMO_CONTAINER, false));
                 long timeCamoEmissive = stone ? 0 : testModel(state, makeModelData(state, TEST_CAMO_CONTAINER, true));
-                results.computeIfAbsent(entry.getKey(), $ -> new ArrayList<>()).add(new Result(timeEmpty, timeCamo, timeCamoEmissive));
+                results.computeIfAbsent(entry.getKey(), _ -> new ArrayList<>()).add(new Result(timeEmpty, timeCamo, timeCamoEmissive));
             }
         }
 

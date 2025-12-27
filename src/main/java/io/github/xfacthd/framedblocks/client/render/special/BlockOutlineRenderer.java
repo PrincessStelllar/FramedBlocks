@@ -92,7 +92,7 @@ public final class BlockOutlineRenderer
 
             Vec3 offset = Vec3.atLowerCornerOf(result.getBlockPos()).subtract(event.getCamera().position());
             boolean highContrast = event.isHighContrast();
-            event.addCustomRenderer((renderState, buffer, poseStack, translucentPass, levelRenderState) ->
+            event.addCustomRenderer((renderState, buffer, poseStack, translucentPass, _) ->
             {
                 if (translucentPass == renderState.isTranslucent())
                 {
@@ -117,7 +117,6 @@ public final class BlockOutlineRenderer
     @SuppressWarnings("unchecked")
     private static OutlineRenderer<Object> getRenderer(IBlockType type)
     {
-        //noinspection NullableProblems IDEA's jspecify nullness checker sucks
         return (OutlineRenderer<Object>) OUTLINE_RENDERERS.get(type);
     }
 

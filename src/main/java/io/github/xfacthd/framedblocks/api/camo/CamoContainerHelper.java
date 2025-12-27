@@ -186,8 +186,6 @@ public final class CamoContainerHelper
         return camo;
     }
 
-
-
     public static final class Client
     {
         /**
@@ -200,12 +198,8 @@ public final class CamoContainerHelper
             return clientHandler.getOrCreateModel(content);
         }
 
-
-
         private Client() { }
     }
-
-
 
     private CamoContainerHelper() { }
 }
